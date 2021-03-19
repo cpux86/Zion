@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Domain.Common
 {
-    public abstract class AggregateRoot
+    public abstract class AggregateRoot<TKey> : BaseEntity<TKey>
     {
 
     }
