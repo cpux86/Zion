@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Domain.Entities.ProductAggregate
 {
-    public class Properties : BaseEntity
+    public class Properties
     {
 
     }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Ardalis.GuardClauses;
+using System.Linq;
 
 namespace Domain.Entities.ProductAggregate
 {
@@ -20,24 +21,38 @@ namespace Domain.Entities.ProductAggregate
         /// Цена товара
         /// </summary>
         public decimal Price { get; private set; }
-        public Category Category { get; private set; }
+        /// <summary>
+        /// Категории в которые входит продукт
+        /// </summary>
+        public IReadOnlyCollection<Category> ProductCategories => _categories.AsReadOnly();
         /// <summary>
         /// Характеристики товара
         /// </summary>
         public IReadOnlyCollection<Properties> Properties => _properties.AsReadOnly();
 
+        private readonly List<Category> _categories = new List<Category>();
         private readonly List<Properties> _properties = new List<Properties>();
         private Product()
         {
         }
-        public Product(string name, Category category)
+        public Product(string name, List<Category> category)
         {
             // валидация параметров
             // ........
             Guard.Against.NullOrEmpty(name, nameof(name));
             Name = name;
-            Category = category;
+            _categories = category;
 
+        }
+        /// <summary>
+        /// Обнавить список категории в которые входит продукт
+        /// </summary>
+        public void UpdateCategoriesTheCurrentProduct(HashSet<Category> categories)
+        {
+            // исключаем возможность добавления повторяющихся категорий
+            //IEnumerable<Category> newCategoryList = categories.Distinct<Category>();
+            
+            IEnumerable<Category> c = categories;
         }
         public void UpdateDetails(string name, string description, decimal price)
         {

@@ -24,9 +24,17 @@ namespace Application.Features.ProductFeatures.EventHandlers
         public async Task<Response<int>> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
             // запрашиваем в хранилище категорий, категорию в которую необходимо добавить продукт
-            Category category = await _repo.GetByIdAsync(command.CategoryId);
+            List<Category> categories = new List<Category>();
+            categories.Distinct<Category>();
+            foreach (var item in command.Categories)
+            {
+                
+                categories.Add(await _repo.GetByIdAsync(item));
+            }
+            //Category category = await _repo.GetByIdAsync(command.Categories);
             // создаем продукт
-            Product product = new Product(command.Title, category);
+            Product product = new Product(command.Title, categories);
+            
             product.Description = command.Description;
             
 

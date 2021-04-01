@@ -37,7 +37,11 @@ namespace Persistence.Repositories
 
         public async Task UpdateAsync(TEntity entity)
         {
+            // здесь обновится сущьность полностью
             _catalogContext.Entry(entity).State = EntityState.Modified;
+            // а здесь только измененные заначения
+            _catalogContext.Attach(entity);
+            
             await _catalogContext.SaveChangesAsync();
         }
 
