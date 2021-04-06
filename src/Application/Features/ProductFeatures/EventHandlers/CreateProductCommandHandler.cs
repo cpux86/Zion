@@ -10,40 +10,25 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
+using AutoMapper;
+using Domain.Interfaces.Repositories;
 
 namespace Application.Features.ProductFeatures.EventHandlers
 {
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Response<int>>
     {
-        private readonly IGenericRepositoryAsync<Category, int> _repo;
-        public CreateProductCommandHandler(IGenericRepositoryAsync<Category, int> genericRepository)
+        private readonly IProductRepositoryAsync _repo;
+        public CreateProductCommandHandler(IProductRepositoryAsync genericRepository , IMapper mapper)
         {
-            _repo = genericRepository;
+           _repo = genericRepository;
         }
 
         public async Task<Response<int>> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
-            // запрашиваем в хранилище категорий, категорию в которую необходимо добавить продукт
-            List<Category> categories = new List<Category>();
-            categories.Distinct<Category>();
-            foreach (var item in command.Categories)
-            {
-                
-                categories.Add(await _repo.GetByIdAsync(item));
-            }
-            //Category category = await _repo.GetByIdAsync(command.Categories);
-            // создаем продукт
-            Product product = new Product(command.Title, categories);
             
-            product.Description = command.Description;
             
 
             return await Task.FromResult(new Response<int>(1,"готово"));
         }
-
-        //public Task<Unit> Handle(CreateProductCommand request, CancellationToken cancellationToken)
-        //{
-        //    return Task.FromResult(Unit.Value);
-        //}
     }
 }

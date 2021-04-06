@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Domain.Entities.ProductAggregate
 {
-    public class Product : AggregateRoot<Guid>
+    public class Product : AggregateRoot<int>
     {
         /// <summary>
         /// Название товара

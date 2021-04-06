@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Domain.Interfaces.Repositories
 {
-    public interface IProductRepositoryAsync : IGenericRepositoryAsync<Product, Guid>
+    public interface IProductRepositoryAsync : IGenericRepositoryAsync<Product, int>
     {
     }
 }

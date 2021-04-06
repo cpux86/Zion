@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Persistence.Repositories
 {
-    public class ProductRepositoryAsync : GenericRepositoryAsync<Product, Guid>, IProductRepositoryAsync
+    public class ProductRepositoryAsync : GenericRepositoryAsync<Product, int>, IProductRepositoryAsync
     {
         public ProductRepositoryAsync(CatalogContext catalogContext) : base(catalogContext)
         {

@@ -7,15 +7,16 @@ using System.Reflection;
 
 namespace Application
 {
-    public static class ApplicationExtensions
+    public static class ServiceExtensions
     {
         /// <summary>
         /// Добовляет компонетны урованя приложения
         /// </summary>
-        /// <param name="service"></param>
-        public static void AddApplication(this IServiceCollection service)
+        /// <param name="services"></param>
+        public static void AddApplication(this IServiceCollection services)
         {
-            service.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
     }
 }
