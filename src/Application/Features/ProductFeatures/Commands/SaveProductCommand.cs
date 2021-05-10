@@ -6,11 +6,12 @@ using System.Text;
 
 namespace Application.Features.ProductFeatures.Commands
 {
-    public class CreateProductCommand : IRequest<Response<int>>
+    public class SaveProductCommand : IRequest<Response<int>>
     {
+        public int? Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public List<int> Categories { get; set; }
+        public IEnumerable<int> Categories { get; set; }
         public string Images { get; set; }
         public decimal Price { get; set; }
         

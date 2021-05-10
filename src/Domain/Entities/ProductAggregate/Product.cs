@@ -12,7 +12,7 @@ namespace Domain.Entities.ProductAggregate
         /// <summary>
         /// Название товара
         /// </summary>
-        public string Name { get; private set; }
+        public string Title { get; set; }
         /// <summary>
         /// Описание товара
         /// </summary>
@@ -20,47 +20,44 @@ namespace Domain.Entities.ProductAggregate
         /// <summary>
         /// Цена товара
         /// </summary>
-        public decimal Price { get; private set; }
+        public decimal Price { get; set; }
         /// <summary>
         /// Категории в которые входит продукт
         /// </summary>
-        public IReadOnlyCollection<Category> ProductCategories => _categories.AsReadOnly();
+        public IEnumerable<Category> Categories { get; private set; }
         /// <summary>
         /// Характеристики товара
         /// </summary>
         public IReadOnlyCollection<Properties> Properties => _properties.AsReadOnly();
 
-        private readonly List<Category> _categories = new List<Category>();
         private readonly List<Properties> _properties = new List<Properties>();
         private Product()
         {
         }
-        public Product(string name, List<Category> category)
+        public Product(string name)
         {
             // валидация параметров
-            // ........
-            Guard.Against.NullOrEmpty(name, nameof(name));
-            Name = name;
-            _categories = category;
+            Title = name;
 
         }
         /// <summary>
-        /// Обнавить список категории в которые входит продукт
+        /// прикрепите продукт к категориям 
         /// </summary>
-        public void UpdateCategoriesTheCurrentProduct(HashSet<Category> categories)
+        public void AttachProductToCategories(IEnumerable<Category> categories)
         {
             // исключаем возможность добавления повторяющихся категорий
             //IEnumerable<Category> newCategoryList = categories.Distinct<Category>();
+            Categories = categories.Distinct<Category>();
             
-            IEnumerable<Category> c = categories;
         }
+
         public void UpdateDetails(string name, string description, decimal price)
         {
             // валидация параметров
             // ........
             Guard.Against.NullOrEmpty(name, nameof(name));
             Guard.Against.NullOrEmpty(description, nameof(description));
-            Name = name;
+            Title = name;
             Description = description;
             Price = price;
         }

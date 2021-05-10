@@ -11,6 +11,7 @@ namespace Persistence.Repositories
     {
         public ProductRepositoryAsync(CatalogContext catalogContext) : base(catalogContext)
         {
+            
         }
     }
 }
