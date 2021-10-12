@@ -1,8 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace Application

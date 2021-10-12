@@ -1,11 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Domain.Interfaces;
-using Persistence.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Domain.Interfaces.Repositories;
 using Persistence.Context;
+
 
 namespace Persistence
 {
@@ -15,8 +10,8 @@ namespace Persistence
         {
             #region Repositories
             services.AddTransient<CatalogContext>();
-            services.AddTransient(typeof(IGenericRepositoryAsync<,>),typeof(GenericRepositoryAsync<,>));
-            services.AddTransient<IProductRepositoryAsync, ProductRepositoryAsync>();
+            //services.AddTransient(typeof(IGenericRepositoryAsync<,>), typeof(GenericRepositoryAsync<,>));
+            //services.AddTransient<IProductsRepositoryAsync, ProductRepositoryAsync>();
             #endregion
 
         }

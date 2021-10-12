@@ -1,9 +1,6 @@
-﻿using Application.Features.ProductFeatures.Commands;
+﻿
 using AutoMapper;
 using Domain.Entities.ProductAggregate;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Application.Mappings
 {
@@ -11,7 +8,7 @@ namespace Application.Mappings
     {
         public GeneralProfile()
         {
-            CreateMap<SaveProductCommand, Product>();
+            //CreateMap<SaveProductCommand, Product>();
         }
     }
 }

@@ -2,11 +2,10 @@
 using Domain.Entities.ProductAggregate;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.Entities
 {
-    public class Category : AggregateRoot<int>
+    public class Category
     {
         public Category(string name)
         {
@@ -18,7 +17,7 @@ namespace Domain.Entities
         {
             // Требуется для EF
         }
-
+        public Guid Guid { get; set; }
         public string Name { get; private set; }
         public string Description { get; set; }
         // дочерние категории

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Common
 {
-    public abstract class BaseEntity<TKey> : IHasKey<TKey>
+    public abstract class BaseEntity
     {
-        [Key]
-        public TKey Id { get; set; }
 
     }
 }
