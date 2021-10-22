@@ -3,11 +3,16 @@ using Domain.Entities.ProductAggregate;
 using System;
 using System.Collections.Generic;
 
-namespace Domain.Entities
+namespace Domain.Entities.OrderAggregate
 {
-    public class Order : BaseEntity
+    public class Order : BaseDeletableEntity
     {
-        public Guid Id { get; set; }
+        public Order()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
+        public string Id { get; set; }
         /// <summary>
         /// Заголовок, к примеру "Микросхема ШИМ-контроллера"
         /// </summary>
@@ -19,10 +24,11 @@ namespace Domain.Entities
         /// <summary>
         /// URL-адреса изображений искомых товаров
         /// </summary>
-        public IEnumerable<string> ProductImagesURLs { get; set; } = new HashSet<string>();
+        public string ImageSource { get; set; } 
         /// <summary>
         /// товары предложенные продовцамаи, подходящие по описанию.
         /// </summary>
-        public IEnumerable<Product> Products { get; set; } = new HashSet<Product>();
+        public List<Product> Products { get; set; }
+        
     }
 }

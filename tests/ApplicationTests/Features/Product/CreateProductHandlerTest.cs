@@ -5,10 +5,10 @@ namespace ApplicationTests.Features.Product
 {
     public class CreateProductHandlerTest
     {
-        [Fact]
-        public async Task CreateProduct_Success()
-        {
+        //[Fact]
+        //public async  Task CreateProduct_Success()
+        //{
 
-        }
+        //}
     }
 }

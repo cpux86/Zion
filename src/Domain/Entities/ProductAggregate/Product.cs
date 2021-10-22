@@ -19,7 +19,7 @@ namespace Domain.Entities.ProductAggregate
         /// <summary>
         /// URL-адреса изображений товара
         /// </summary>
-        public IEnumerable<string> ProductImagesURLs { get; set; } = new HashSet<string>();
+        //public IEnumerable<string> ProductImagesURLs { get; set; } = new HashSet<string>();
         /// <summary>
         /// Цена товара
         /// </summary>

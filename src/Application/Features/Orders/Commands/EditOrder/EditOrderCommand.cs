@@ -5,14 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Orders.Commands.CreateOrder
+namespace Application.Features.Orders.Commands.EditOrder
 {
-    public class CreateOrderCommand : IRequest<Guid>
+    public class EditOrderCommand : IRequest<bool>
     {
+        public string OrderId { get; set; }
         /// <summary>
         /// Заголовок, к примеру "Микросхема ШИМ-контроллера"
         /// </summary>
-        public string Title { get; set; }
+        public string Title { get; set; } = "Без названия";
         /// <summary>
         /// Комментарии, к промеру "Шим-контроллер с частоного преобразователя Siemens"
         /// </summary>
@@ -20,6 +21,6 @@ namespace Application.Features.Orders.Commands.CreateOrder
         /// <summary>
         /// URL-адреса изображений искомых товаров
         /// </summary>
-        public IEnumerable<string> ProductImagesURLs { get; set; } = new HashSet<string>();
+        public string ImageSource { get; set; }
     }
 }

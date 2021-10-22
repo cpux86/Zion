@@ -1,5 +1,5 @@
 ﻿using Application.Interfaces;
-using Domain.Entities;
+using Domain.Entities.OrderAggregate;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,5 +13,6 @@ namespace Persistence.Context
     {
         public DbSet<Order> Orders { get; set; }
         public OrderDbContext([NotNull] DbContextOptions options) : base(options) { }
+
     }
 }
