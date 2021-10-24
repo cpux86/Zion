@@ -5,15 +5,15 @@ using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-    public class Category
+    public class ProductCatalog
     {
-        public Category(string name)
+        public ProductCatalog(string name)
         {
             Name = name;
-            Items = new List<Category>();
+            Items = new List<ProductCatalog>();
         }
 
-        private Category()
+        private ProductCatalog()
         {
             // Требуется для EF
         }
@@ -21,7 +21,7 @@ namespace Domain.Entities
         public string Name { get; private set; }
         public string Description { get; set; }
         // дочерние категории
-        public List<Category> Items { get; private set; }
+        public List<ProductCatalog> Items { get; private set; }
         public List<Product> Products { get; private set; } = new List<Product>();
         public List<Properties> Properties { get; private set; }
         /// <summary>
@@ -36,7 +36,7 @@ namespace Domain.Entities
         /// Добавить подкатегорию
         /// </summary>
         /// <param name="item"></param>
-        public void AddCategoryItem(Category item)
+        public void AddCategoryItem(ProductCatalog item)
         {
             Items.Add(item);
         }

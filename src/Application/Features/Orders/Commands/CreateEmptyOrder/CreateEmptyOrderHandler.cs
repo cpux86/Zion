@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Orders.Commands.CreateEmptyOrder
 {
-    public class CreateEmptyOrderHandler : IRequestHandler<CreateEmptyOrderCommand, string>
+    public class CreateEmptyOrderHandler : IRequestHandler<CreateEmptyOrderCommand, Guid>
     {
         private readonly IOrderDbContext _dbContext;
 
@@ -19,14 +19,20 @@ namespace Application.Features.Orders.Commands.CreateEmptyOrder
             _dbContext = dbContext;
         }
 
-        public async Task<string> Handle(CreateEmptyOrderCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateEmptyOrderCommand request, CancellationToken cancellationToken)
         {
-            var order = new Order()
-            {
-                Id = Guid.NewGuid().ToString(),
-                CreatedBy = request.UserId
+            //var order = new Order()
+            //{
+            //    //Id = Guid.NewGuid(),
+            //    // назначаем владельца сущьности
+            //    //CreatedBy = Guid.Parse(request.UserId),
+            //    // устанавливаем дату создания заказа, дата остается не изменна, не зависимо от статуса заказа
+            //    CreatedOn = DateTimeOffset.UtcNow
 
-            };
+            //};
+
+            var order = new Order(request.UserId);
+            
 
             await _dbContext.Orders.AddAsync(order, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);

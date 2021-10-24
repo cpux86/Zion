@@ -6,10 +6,17 @@ namespace Domain.Common
 {
     public abstract class BaseEntity : IAuditInfo
     {
-        public DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime? ModifiedOn { get; set; }
-        public DateTime? PublicationDate { get; set; }
+        public DateTimeOffset CreatedOn { get; set; }
+        public Guid CreatedBy { get; set; }
+        public DateTimeOffset? ModifiedOn { get; set; }
+        /// <summary>
+        /// Дата публикации заказа
+        /// </summary>
+        public DateTimeOffset? PublicationDate { get; set; }
+        /// <summary>
+        /// Дата поледней публикации
+        /// </summary>
+        public DateTimeOffset? LastPublicationDate { get; set; }
         public bool IsActive { get; set; }
     }
 }

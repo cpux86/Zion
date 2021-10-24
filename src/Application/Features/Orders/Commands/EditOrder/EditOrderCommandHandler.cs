@@ -22,8 +22,8 @@ namespace Application.Features.Orders.Commands.EditOrder
 
         public async Task<bool> Handle(EditOrderCommand request, CancellationToken cancellationToken)
         {
-            // Если запрошанный заказ имеется в БД, то получаем его для редактирования
-            Order order = _dbContext.Orders.Where(o => o.Id == request.OrderId).FirstOrDefault();
+            // Если запрошанный заказ имеется в БД, то получаем его для заполнения
+            Order order = _dbContext.Orders.Where(o => o.Id.ToString() == request.OrderId).FirstOrDefault();
             if (order==null)
             {
                 return false;

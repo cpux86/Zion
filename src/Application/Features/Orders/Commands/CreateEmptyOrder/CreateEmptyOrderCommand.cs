@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Orders.Commands.CreateEmptyOrder
 {
-    public class CreateEmptyOrderCommand : IRequest<string>
+    public class CreateEmptyOrderCommand : IRequest<Guid>
     {
         public string UserId { get; set; }
     }

@@ -11,7 +11,7 @@ namespace Application.Interfaces
 {
     public interface ICatalogContext
     {
-        DbSet<Category> Categories { get; set; }
+        DbSet<ProductCatalog> Categories { get; set; }
         DbSet<Product> Products { get; set; }
         DbSet<Properties> Properties { get; set; }
     }

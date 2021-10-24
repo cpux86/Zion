@@ -21,17 +21,23 @@ namespace ApplicationTests.Common
 
             var context = new OrderDbContext(options);
             context.Orders.AddRange(
-                new Order
+                new Order(User1)
                 {
                     Title = "Микросхема ШИМ-контроллера",
                     Comments = "Шим-контроллер с частоного преобразователя Siemens",
                     ImageSource = "https//zion.ru/images/1.jpg",
-                    CreatedOn = DateTime.UtcNow,
-                    CreatedBy = User1
-                }
+                    //CreatedOn = DateTimeOffset.UtcNow,
+                    //ModifiedOn = DateTimeOffset.UtcNow,
+                    //CreatedBy = Guid.Parse(User1),
+                    //IsActive = false,
+                    //IsDeleted = false,
+                    
+                    
+                },
+                new Order(User1) { }
                 );
 
-
+            //Order or1 = new Order().
             context.SaveChanges();
             return context;
         }

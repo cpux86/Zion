@@ -12,19 +12,23 @@ namespace ApplicationTests.Features.Order.Commands
 {
     public class CreateEmptyOrderTest : TestCommandBase
     {
+        const string user1ID = "0f67cf57-aaa9-4a6a-adff-baaa20e3a8b1";
+
         [Theory]
-        [InlineData("0f67cf57-aaa9-4a6a-adff-baaa20e3a8b1")]
+        [InlineData(user1ID)]
         public async Task CreateEmptyOrder_EmptyOrder(string userId)
         {
             var handler = new CreateEmptyOrderHandler(Context);
-            await handler.Handle(
+            var orderId = await handler.Handle(
                 new CreateEmptyOrderCommand
                 {
                     UserId = userId
                 },
                 CancellationToken.None);
-            var result = Context.Orders.Where(u => u.CreatedBy == userId).FirstOrDefault();
-            Assert.Equal(result.CreatedBy, userId);
+            var result = Context.Orders.Where(u => u.CreatedBy.ToString() ==  userId).FirstOrDefault();
+            var t = result.CreatedOn.LocalDateTime;
+            
+            Assert.Equal(result.CreatedBy.ToString(), userId);
         }
     }
 }

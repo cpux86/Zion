@@ -9,7 +9,7 @@ namespace Persistence.Context
 {
     public class CatalogContext : DbContext, ICatalogContext
     {
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<ProductCatalog> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Properties> Properties { get; set; }
 

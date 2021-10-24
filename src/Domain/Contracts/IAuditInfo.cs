@@ -11,19 +11,19 @@ namespace Domain.Contracts
         /// <summary>
         /// Дата создания сущности
         /// </summary>
-        DateTime CreatedOn { get; set; }
+        DateTimeOffset CreatedOn { get; set; }
         /// <summary>
         /// Владелец сущности(ID юзера)
         /// </summary>
-        string CreatedBy { get; set; }
+        Guid CreatedBy { get; set; }
         /// <summary>
         /// Дата изменения сущности
         /// </summary>
-        DateTime? ModifiedOn { get; set; }
+        DateTimeOffset? ModifiedOn { get; set; }
         /// <summary>
         /// Дата публикации заказа
         /// </summary>
-        DateTime? PublicationDate { get; set; }
+        DateTimeOffset? PublicationDate { get; set; }
         /// <summary>
         /// опубликован ли заказ
         /// </summary>
