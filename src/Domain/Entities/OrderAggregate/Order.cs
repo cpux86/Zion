@@ -31,11 +31,11 @@ namespace Domain.Entities.OrderAggregate
         /// <summary>
         /// Заголовок, к примеру "Микросхема ШИМ-контроллера"
         /// </summary>
-        public  string Title { get; set; }
+        public  string Title { get; private set; }
         /// <summary>
         /// Комментарии, к промеру "Шим-контроллер с частоного преобразователя Siemens"
         /// </summary>
-        public string Comments { get; set; }
+        public string Comments { get; private set; }
         /// <summary>
         /// URL-адреса изображений искомых товаров
         /// </summary>
@@ -44,6 +44,10 @@ namespace Domain.Entities.OrderAggregate
         /// товары предложенные продовцамаи, подходящие по описанию.
         /// </summary>
         public List<Product> Products { get; set; }
+        /// <summary>
+        /// Статус заказа: активен, не активен и т.д
+        /// </summary>
+        public OrderStatus Status { get; private set; }
         
     }
 }

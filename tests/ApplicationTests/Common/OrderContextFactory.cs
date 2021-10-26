@@ -25,16 +25,16 @@ namespace ApplicationTests.Common
                 {
                     Title = "Микросхема ШИМ-контроллера",
                     Comments = "Шим-контроллер с частоного преобразователя Siemens",
-                    ImageSource = "https//zion.ru/images/1.jpg",
-                    //CreatedOn = DateTimeOffset.UtcNow,
-                    //ModifiedOn = DateTimeOffset.UtcNow,
-                    //CreatedBy = Guid.Parse(User1),
-                    //IsActive = false,
-                    //IsDeleted = false,
-                    
-                    
+                    ImageSource = "https//zion.ru/images/1.jpg"
                 },
-                new Order(User1) { }
+                new Order(
+                    "Микросхема ШИМ-контроллера",
+                    "Шим-контроллер с частоного преобразователя Siemens"
+                    )
+                {
+
+                }
+                 
                 );
 
             //Order or1 = new Order().
