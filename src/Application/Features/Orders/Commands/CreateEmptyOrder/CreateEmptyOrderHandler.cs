@@ -21,20 +21,8 @@ namespace Application.Features.Orders.Commands.CreateEmptyOrder
 
         public async Task<Guid> Handle(CreateEmptyOrderCommand request, CancellationToken cancellationToken)
         {
-            //var order = new Order()
-            //{
-            //    //Id = Guid.NewGuid(),
-            //    // назначаем владельца сущьности
-            //    //CreatedBy = Guid.Parse(request.UserId),
-            //    // устанавливаем дату создания заказа, дата остается не изменна, не зависимо от статуса заказа
-            //    CreatedOn = DateTimeOffset.UtcNow
-
-            //};
-
             var order = new Order(request.UserId, DateTimeOffset.UtcNow);
-            
-
-            //await _dbContext.Orders.AddAsync(order, cancellationToken);
+            await _dbContext.Orders.AddAsync(order, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             return order.Id;

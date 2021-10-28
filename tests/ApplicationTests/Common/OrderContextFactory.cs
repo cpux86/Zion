@@ -27,9 +27,20 @@ namespace ApplicationTests.Common
                 //    Comments = "Шим-контроллер с частоного преобразователя Siemens",
                 //    ImageSource = "https//zion.ru/images/1.jpg"
                 //},
-                new Order(User1,DateTimeOffset.UtcNow)
-                 
-                );;
+                new Order(User1,DateTimeOffset.UtcNow).Update(
+                    "Микросхема №1 ШИМ-контроллера",
+                    "Шим-контроллер с частоного преобразователя Siemens",
+                    DateTimeOffset.UtcNow),
+                new Order(User1, DateTimeOffset.UtcNow).Update(
+                    "Микросхема №2 ШИМ-контроллера",
+                    "Шим-контроллер с частоного преобразователя Siemens",
+                    DateTimeOffset.UtcNow),
+                new Order(User1, DateTimeOffset.UtcNow).Update(
+                    "Микросхема №3 ШИМ-контроллера",
+                    "Шим-контроллер с частоного преобразователя Siemens",
+                    DateTimeOffset.UtcNow)
+
+                );
 
             context.SaveChanges();
             return context;

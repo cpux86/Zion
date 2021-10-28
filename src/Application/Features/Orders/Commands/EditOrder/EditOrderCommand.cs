@@ -22,5 +22,7 @@ namespace Application.Features.Orders.Commands.EditOrder
         /// URL-адреса изображений искомых товаров
         /// </summary>
         public string ImageSource { get; set; }
+
+        public string CreatedBy { get; set; }
     }
 }

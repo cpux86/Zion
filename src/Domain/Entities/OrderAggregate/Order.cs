@@ -7,10 +7,7 @@ namespace Domain.Entities.OrderAggregate
 {
     public class Order : BaseDeletableEntity
     {
-        private Order()
-        {
-            //Id = Guid.NewGuid();
-        }
+        private Order() { } // нужен для EF
         public Order(string userID, DateTimeOffset dateTime)
         {
             // назначаем владельца сущьности
@@ -20,7 +17,6 @@ namespace Domain.Entities.OrderAggregate
             ModifiedOn = dateTime;
         }
 
-        private readonly Guid _userID;
         ///// <summary>
         ///// Обновить дату публикации
         ///// </summary>
@@ -32,11 +28,12 @@ namespace Domain.Entities.OrderAggregate
         //    Comments = comments;
         //}
 
-        public void Update(string title, string comments, DateTimeOffset dateTime)
+        public Order Update(string title, string comments, DateTimeOffset dateTime)
         {
             Title = title;
             Comments = comments;
             ModifiedOn = dateTime;
+            return this;
         }
 
 
@@ -44,7 +41,7 @@ namespace Domain.Entities.OrderAggregate
         /// <summary>
         /// Заголовок, к примеру "Микросхема ШИМ-контроллера"
         /// </summary>
-        public  string Title { get; private set; }
+        public string Title { get; private set; }
         /// <summary>
         /// Комментарии, к промеру "Шим-контроллер с частоного преобразователя Siemens"
         /// </summary>
@@ -52,7 +49,7 @@ namespace Domain.Entities.OrderAggregate
         /// <summary>
         /// URL-адреса изображений искомых товаров
         /// </summary>
-        public string ImageSource { get; private set; } 
+        public string ImageSource { get; private set; }
         /// <summary>
         /// товары предложенные продовцамаи, подходящие по описанию.
         /// </summary>
@@ -61,6 +58,6 @@ namespace Domain.Entities.OrderAggregate
         /// Статус заказа: активен, не активен и т.д
         /// </summary>
         public OrderStatus Status { get; private set; }
-        
+
     }
 }

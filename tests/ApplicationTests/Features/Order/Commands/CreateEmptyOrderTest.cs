@@ -26,7 +26,6 @@ namespace ApplicationTests.Features.Order.Commands
                 },
                 CancellationToken.None);
             var result = Context.Orders.Where(u => u.CreatedBy.ToString() ==  userId).FirstOrDefault();
-            var t = result.CreatedOn.LocalDateTime;
             
             Assert.Equal(result.CreatedBy.ToString(), userId);
         }

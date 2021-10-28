@@ -23,18 +23,14 @@ namespace Application.Features.Orders.Commands.EditOrder
         public async Task<bool> Handle(EditOrderCommand request, CancellationToken cancellationToken)
         {
             // Если запрошанный заказ имеется в БД, то получаем его для заполнения
-            Order order = _dbContext.Orders.Where(o => o.Id.ToString() == request.OrderId).FirstOrDefault();
+            Order order = _dbContext.Orders.Where(o => o.Id.ToString() == request.OrderId && o.CreatedBy.ToString() == request.CreatedBy).FirstOrDefault();
             if (order==null)
             {
                 return false;
             }
-            //order.Title = request.Title;
-            //order.Comments = request.Comments;
-            //order.ImageSource = request.ImageSource;
-            //order.ModifiedOn = DateTime.UtcNow;
-            
+            _dbContext.Orders.Attach(order);
+            order.Update(request.Title,request.Comments, DateTimeOffset.UtcNow);
 
-            //await _dbContext.Orders.AddAsync(order, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             return true;
