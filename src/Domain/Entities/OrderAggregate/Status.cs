@@ -11,9 +11,10 @@ namespace Domain.Entities.OrderAggregate
     /// </summary>
     public enum OrderStatus
     {
-        Active,    
         Disabled,
+        Deleted,
+        Active,    
         Locked,
-        Deleted
+        Moderation
     }
 }

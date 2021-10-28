@@ -23,7 +23,7 @@ namespace Domain.Contracts
         /// <summary>
         /// Дата публикации заказа
         /// </summary>
-        DateTimeOffset? PublicationDate { get; set; }
+        DateTimeOffset? PublishedOn { get; set; }
         /// <summary>
         /// опубликован ли заказ
         /// </summary>

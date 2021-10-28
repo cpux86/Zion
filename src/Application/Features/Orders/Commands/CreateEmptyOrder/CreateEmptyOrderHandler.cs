@@ -31,10 +31,10 @@ namespace Application.Features.Orders.Commands.CreateEmptyOrder
 
             //};
 
-            var order = new Order(request.UserId);
+            var order = new Order(request.UserId, DateTimeOffset.UtcNow);
             
 
-            await _dbContext.Orders.AddAsync(order, cancellationToken);
+            //await _dbContext.Orders.AddAsync(order, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             return order.Id;

@@ -12,7 +12,7 @@ namespace Domain.Common
         /// <summary>
         /// Дата публикации заказа
         /// </summary>
-        public DateTimeOffset? PublicationDate { get; set; }
+        public DateTimeOffset? PublishedOn { get; set; }
         /// <summary>
         /// Дата поледней публикации
         /// </summary>

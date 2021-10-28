@@ -11,21 +11,34 @@ namespace Domain.Entities.OrderAggregate
         {
             //Id = Guid.NewGuid();
         }
-        public Order(string userID)
+        public Order(string userID, DateTimeOffset dateTime)
         {
             // назначаем владельца сущьности
             CreatedBy = Guid.Parse(userID);
             // устанавливаем дату создания заказа, дата остается не изменна, не зависимо от статуса заказа
-            CreatedOn = DateTimeOffset.UtcNow;
-            ModifiedOn = DateTimeOffset.UtcNow;
-
+            CreatedOn = dateTime;
+            ModifiedOn = dateTime;
         }
+
         private readonly Guid _userID;
-        public Order(string title, string comments)
+        ///// <summary>
+        ///// Обновить дату публикации
+        ///// </summary>
+        ///// <param name="title"></param>
+        ///// <param name="comments"></param>
+        //public void UpdatePublishedOn(string title, string comments)
+        //{
+        //    Title = title;
+        //    Comments = comments;
+        //}
+
+        public void Update(string title, string comments, DateTimeOffset dateTime)
         {
             Title = title;
             Comments = comments;
+            ModifiedOn = dateTime;
         }
+
 
         public Guid Id { get; private set; }
         /// <summary>
@@ -39,7 +52,7 @@ namespace Domain.Entities.OrderAggregate
         /// <summary>
         /// URL-адреса изображений искомых товаров
         /// </summary>
-        public string ImageSource { get; set; } 
+        public string ImageSource { get; private set; } 
         /// <summary>
         /// товары предложенные продовцамаи, подходящие по описанию.
         /// </summary>

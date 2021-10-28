@@ -28,11 +28,10 @@ namespace Application.Features.Orders.Commands.EditOrder
             {
                 return false;
             }
-            order.Title = request.Title;
-            order.Comments = request.Comments;
-            order.ImageSource = request.ImageSource;
-            order.ModifiedOn = DateTime.UtcNow;
-
+            //order.Title = request.Title;
+            //order.Comments = request.Comments;
+            //order.ImageSource = request.ImageSource;
+            //order.ModifiedOn = DateTime.UtcNow;
             
 
             //await _dbContext.Orders.AddAsync(order, cancellationToken);
