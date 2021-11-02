@@ -3,25 +3,21 @@ using Domain.Entities.ProductAggregate;
 using System;
 using System.Collections.Generic;
 
-namespace Domain.Entities
+namespace Domain.Entities.CatalogAggregate
 {
-    public class ProductCatalog
+    public class Catalog : BaseEntity
     {
-        public ProductCatalog(string name)
+        public Catalog(string name)
         {
-            Name = name;
-            Items = new List<ProductCatalog>();
+
         }
 
-        private ProductCatalog()
+        private Catalog()
         {
             // Требуется для EF
         }
-        public Guid Guid { get; set; }
-        public string Name { get; private set; }
-        public string Description { get; set; }
         // дочерние категории
-        public List<ProductCatalog> Items { get; private set; }
+        public List<Category> Categories { get; private set; }
         public List<Product> Products { get; private set; } = new List<Product>();
         public List<Properties> Properties { get; private set; }
         /// <summary>
@@ -35,10 +31,10 @@ namespace Domain.Entities
         /// <summary>
         /// Добавить подкатегорию
         /// </summary>
-        /// <param name="item"></param>
-        public void AddCategoryItem(ProductCatalog item)
+        /// <param name="node">родительская категория</param>
+        public void AddCategory(Category parent)
         {
-            Items.Add(item);
+            Categories.Add(parent);
         }
         /// <summary>
         /// Добавить продукт в категорию

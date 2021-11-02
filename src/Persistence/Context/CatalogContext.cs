@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
+using Domain.Entities.CatalogAggregate;
 using Domain.Entities.ProductAggregate;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,7 @@ namespace Persistence.Context
 {
     public class CatalogContext : DbContext, ICatalogContext
     {
-        public DbSet<ProductCatalog> Categories { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Properties> Properties { get; set; }
 
