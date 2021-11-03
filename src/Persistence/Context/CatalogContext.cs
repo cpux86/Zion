@@ -12,7 +12,6 @@ namespace Persistence.Context
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Properties> Properties { get; set; }
 
         public CatalogContext([NotNull] DbContextOptions options) : base(options) { }
 

@@ -12,7 +12,7 @@ namespace Persistence.Context
     public class OrderDbContext : DbContext, IOrderDbContext
     {
         public DbSet<Order> Orders { get; set; }
-        public OrderDbContext([NotNull] DbContextOptions options) : base(options) { }
+        public OrderDbContext([NotNull] DbContextOptions<OrderDbContext> options) : base(options) { }
 
     }
 }

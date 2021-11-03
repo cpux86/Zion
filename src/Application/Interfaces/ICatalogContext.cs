@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Entities.CatalogAggregate;
 using Domain.Entities.ProductAggregate;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,8 +12,7 @@ namespace Application.Interfaces
 {
     public interface ICatalogContext
     {
-        DbSet<Catalog> Categories { get; set; }
+        DbSet<Category> Categories { get; set; }
         DbSet<Product> Products { get; set; }
-        DbSet<Properties> Properties { get; set; }
     }
 }
