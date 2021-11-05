@@ -1,5 +1,6 @@
 ﻿using Application.Features.Orders.Commands.CreateEmptyOrder;
 using ApplicationTests.Common;
+using Domain.Entities.OrderAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,9 @@ namespace ApplicationTests.Features.Order.Commands
                     UserId = userId
                 },
                 CancellationToken.None);
-            var result = Context.Orders.Where(u => u.CreatedBy.ToString() ==  userId).FirstOrDefault();
-            
+            string str = userId.ToUpper();
+
+            var result = Context.Orders.Where(u => u.CreatedBy == Guid.Parse(userId)).FirstOrDefault();
             Assert.Equal(result.CreatedBy.ToString(), userId);
         }
     }

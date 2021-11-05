@@ -9,7 +9,7 @@ namespace ApplicationTests.Common
 {
     public abstract class TestCommandBase : IDisposable
     {
-        protected readonly OrderDbContext Context;
+        protected readonly CatalogContext Context;
         public TestCommandBase()
         {
             Context = OrderContextFactory.Create();

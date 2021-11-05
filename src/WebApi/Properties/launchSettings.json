@@ -13,6 +13,7 @@
       "commandName": "IISExpress",
       "launchUrl": "weatherforecast",
       "environmentVariables": {
+        "test": "fdfd",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

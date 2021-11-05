@@ -37,7 +37,7 @@ namespace Domain.Entities.OrderAggregate
         }
 
 
-        public Guid Id { get; private set; }
+        //public Guid Id { get; private set; }
         /// <summary>
         /// Заголовок, к примеру "Микросхема ШИМ-контроллера"
         /// </summary>

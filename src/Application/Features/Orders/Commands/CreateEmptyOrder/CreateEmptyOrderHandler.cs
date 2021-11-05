@@ -12,9 +12,9 @@ namespace Application.Features.Orders.Commands.CreateEmptyOrder
 {
     public class CreateEmptyOrderHandler : IRequestHandler<CreateEmptyOrderCommand, Guid>
     {
-        private readonly IOrderDbContext _dbContext;
+        private readonly ICatalogContext _dbContext;
 
-        public CreateEmptyOrderHandler(IOrderDbContext dbContext)
+        public CreateEmptyOrderHandler(ICatalogContext dbContext)
         {
             _dbContext = dbContext;
         }

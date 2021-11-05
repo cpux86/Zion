@@ -13,9 +13,9 @@ namespace Application.Features.Orders.Commands.EditOrder
 {
     public class EditOrderCommandHandler : IRequestHandler<EditOrderCommand, bool>
     {
-        private readonly IOrderDbContext _dbContext;
+        private readonly ICatalogContext _dbContext;
 
-        public EditOrderCommandHandler(IOrderDbContext dbContext)
+        public EditOrderCommandHandler(ICatalogContext dbContext)
         {
             _dbContext = dbContext;
         }

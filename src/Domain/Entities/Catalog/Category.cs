@@ -1,12 +1,13 @@
 ﻿using Domain.Common;
+using Domain.Entities.OrderAggregate;
 using Domain.Entities.ProductAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Domain.Entities.CatalogAggregate
+namespace Domain.Entities.Catalog
 {
-    public class Category : BaseEntity
+    public class Category
     {
 
         private Category()
@@ -19,6 +20,7 @@ namespace Domain.Entities.CatalogAggregate
             Name = name;
         }
 
+        public Guid Id { get; set; }
         public string Name { get; private set; }
         public string Description { get; set; }
         /// <summary>
@@ -27,6 +29,9 @@ namespace Domain.Entities.CatalogAggregate
         public Category Parent { get; set; }
         // дочерние категории
         public List<Category> Items { get; private set; }
+        // Заказы. Запрос на приобретение товара, содержащий описание товара
+        public List<Order> Orders { get; private set; }
+        // товары которые уже имеются в категории
         public List<Product> Products { get; private set; } = new List<Product>();
         /// <summary>
         /// Добавить описание категории
