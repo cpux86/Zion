@@ -26,7 +26,6 @@ namespace ApplicationTests.Features.Order.Commands
                     UserId = userId
                 },
                 CancellationToken.None);
-            string str = userId.ToUpper();
 
             var result = Context.Orders.Where(u => u.CreatedBy == Guid.Parse(userId)).FirstOrDefault();
             Assert.Equal(result.CreatedBy.ToString(), userId);

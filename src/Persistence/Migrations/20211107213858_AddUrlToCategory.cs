@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class Initial : Migration
+    public partial class AddUrlToCategory : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,14 +13,9 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Path = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    ParentId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    CreatedOn = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "TEXT", nullable: false),
-                    ModifiedOn = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
-                    PublishedOn = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
-                    LastPublicationDate = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
-                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
+                    ParentId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -116,6 +111,11 @@ namespace Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Description", "Name", "ParentId", "Path" },
+                values: new object[] { new Guid("054c0824-c5eb-47a3-b83b-04b148939681"), null, "Root", null, "/" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_ParentId",

@@ -31,11 +31,22 @@ namespace Persistence.Migrations
                     b.Property<Guid?>("ParentId")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Path")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ParentId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("054c0824-c5eb-47a3-b83b-04b148939681"),
+                            Name = "Root",
+                            Path = "/"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Catalog.Published", b =>
@@ -147,8 +158,9 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
                     b.HasOne("Domain.Entities.Catalog.Category", "Parent")
-                        .WithMany("Items")
-                        .HasForeignKey("ParentId");
+                        .WithMany("Childrens")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Parent");
                 });
@@ -192,7 +204,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
-                    b.Navigation("Items");
+                    b.Navigation("Childrens");
 
                     b.Navigation("Orders");
 

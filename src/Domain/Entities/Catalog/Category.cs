@@ -1,4 +1,5 @@
-﻿using Domain.Common;
+﻿using Ardalis.GuardClauses;
+using Domain.Common;
 using Domain.Entities.OrderAggregate;
 using Domain.Entities.ProductAggregate;
 using System;
@@ -22,15 +23,19 @@ namespace Domain.Entities.Catalog
 
         public Guid Id { get; set; }
         public string Name { get; private set; }
+        /// <summary>
+        /// последняя секция URL
+        /// </summary>
+        public string Path { get; set; }
         public string Description { get; set; }
         /// <summary>
         /// Родительская категория
         /// </summary>
         public Category Parent { get; set; }
         // дочерние категории
-        public List<Category> Items { get; private set; }
+        public List<Category> Childrens { get; private set; } = new List<Category>();
         // Заказы. Запрос на приобретение товара, содержащий описание товара
-        public List<Order> Orders { get; private set; }
+        public List<Order> Orders { get; private set; } = new List<Order>();
         // товары которые уже имеются в категории
         public List<Product> Products { get; private set; } = new List<Product>();
         /// <summary>
@@ -44,10 +49,27 @@ namespace Domain.Entities.Catalog
         /// <summary>
         /// Добавить подкатегорию
         /// </summary>
-        /// <param name="item">Новая категория</param>
-        public void AddCategory(Category item)
+        /// <param name="children">Новая категория</param>
+        public void AddCategory(Category children)
         {
-            Items.Add(item);
+            //try
+            //{
+            //    var s = Guard.Against.NullOrWhiteSpace(children.Name, nameof(children.Name));
+            //}
+            //catch (Exception e)
+            //{
+
+            //    throw;
+            //}
+            
+            //var ch = children.Name.Trim();
+
+            // проверка на конфилкт имен категорий. не допускаем наличии категорий с одинаковым именем
+            if (Childrens.Where(c=>c.Name.Equals(children.Name.Trim(), StringComparison.CurrentCultureIgnoreCase))
+                .Any()) throw new Exception(Name);
+            // есили новая категория с уникльным именем, то добавляем ее в коллекцию
+            Childrens.Add(children);
+
         }
         /// <summary>
         /// Добавить продукт в категорию

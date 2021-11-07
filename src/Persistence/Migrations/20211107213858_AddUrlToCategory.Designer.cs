@@ -9,8 +9,8 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20211104202921_Initial")]
-    partial class Initial
+    [Migration("20211107213858_AddUrlToCategory")]
+    partial class AddUrlToCategory
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,22 +24,7 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTimeOffset>("CreatedOn")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("LastPublicationDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTimeOffset?>("ModifiedOn")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -48,7 +33,7 @@ namespace Persistence.Migrations
                     b.Property<Guid?>("ParentId")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTimeOffset?>("PublishedOn")
+                    b.Property<string>("Path")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -56,6 +41,14 @@ namespace Persistence.Migrations
                     b.HasIndex("ParentId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("054c0824-c5eb-47a3-b83b-04b148939681"),
+                            Name = "Root",
+                            Path = "/"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Catalog.Published", b =>
@@ -167,8 +160,9 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
                     b.HasOne("Domain.Entities.Catalog.Category", "Parent")
-                        .WithMany("Items")
-                        .HasForeignKey("ParentId");
+                        .WithMany("Childrens")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Parent");
                 });
@@ -212,7 +206,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
-                    b.Navigation("Items");
+                    b.Navigation("Childrens");
 
                     b.Navigation("Orders");
 

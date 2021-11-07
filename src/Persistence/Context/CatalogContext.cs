@@ -5,6 +5,7 @@ using Domain.Entities.OrderAggregate;
 using Domain.Entities.ProductAggregate;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 
 namespace Persistence.Context
@@ -23,13 +24,23 @@ namespace Persistence.Context
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-                .UseSqlite(@"DataSource=D:\C#\Zion\DB\Zion.db");
+                .UseSqlite(@"DataSource=C:\C#\Zion\DB\Zion.db");
             }
 
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
+            builder.Entity<Category>().HasData(
+                new Category("Root")
+                {
+                    Id = Guid.NewGuid(),
+                    Path = @"/"
+                }
+                );
+            builder.Entity<Category>()
+                .HasOne(c => c.Parent)
+                .WithMany(c => c.Childrens)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

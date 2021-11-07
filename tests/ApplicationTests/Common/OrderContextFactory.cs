@@ -14,10 +14,6 @@ namespace ApplicationTests.Common
         const string User1 = "295005a2-9b2a-400a-a85b-87c08719b40a";
         const string User2 = "295005a2-9b2a-400a-a85b-87c08719baaa";
 
-        static OrderContextFactory()
-        {
-            var x = 10;
-        }
 
         public static CatalogContext Create()
         {
@@ -27,11 +23,11 @@ namespace ApplicationTests.Common
 
 
             var options = new DbContextOptionsBuilder<CatalogContext>()
-            .UseSqlite(@"DataSource=D:\C#\Zion\DB\Zion.db").Options;
+            .UseSqlite(@"DataSource=C:\C#\Zion\DB\Zion.db").Options;
 
 
             var context = new CatalogContext(options);
-            context.Database.EnsureCreated();
+            //context.Database.EnsureCreated();
             context.Orders.AddRange(
 
                 new Order(User1,DateTimeOffset.UtcNow).Update(
