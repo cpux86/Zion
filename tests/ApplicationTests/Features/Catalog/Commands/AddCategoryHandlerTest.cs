@@ -13,7 +13,7 @@ namespace ApplicationTests.Features.Catalog.Commands
     public class AddCategoryHandlerTest : TestCommandBase
     {
         [Theory]
-        [InlineData("Новая категория", "0358A488-CF82-49B5-A354-53B6C289A761")]
+        [InlineData("UHD", "ADEDBB95-18CF-432B-B7EE-D41F99C5521C")]
         public async Task AddCategory_Id(string name, string parent)
         {
             var handler = new AddCategoryHandler(Context);
