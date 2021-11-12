@@ -43,8 +43,18 @@ namespace ApplicationTests.Common
                     "Шим-контроллер с частоного преобразователя Siemens",
                     DateTimeOffset.UtcNow)
                 );
-            
+
+
             context.SaveChangesAsync();
+
+
+            List<Guid> gStr = new List<Guid>();
+            gStr.Add(Guid.Parse("4C063222-7EDE-4EFF-A792-84C4F296DA0D"));
+            gStr.Add(Guid.Parse("8118CEF9-1CC3-469A-B500-4435657A416D"));
+            gStr.Add(Guid.Parse("94F85337-BB02-4E0C-8663-0C1270EC5A5F"));
+            var result = context.Orders.Where(o => gStr.Contains(o.Id)).Select(e => new { e.Title, e.Id }).ToList();
+
+            
             return context;
         }
     }

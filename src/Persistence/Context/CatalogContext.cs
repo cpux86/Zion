@@ -27,13 +27,16 @@ namespace Persistence.Context
                 .UseSqlite(@"DataSource=C:\C#\Zion\DB\Zion.db");
             }
 
+            optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
+
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Category>().HasData(
                 new Category("Root")
                 {
-                    Id = Guid.NewGuid(),
+                    // Первоначальне значение первичного ключа не может быть null
+                    Id =  1,
                     Path = @"/"
                 }
                 );

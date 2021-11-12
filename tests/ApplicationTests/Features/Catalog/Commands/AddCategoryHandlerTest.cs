@@ -13,15 +13,15 @@ namespace ApplicationTests.Features.Catalog.Commands
     public class AddCategoryHandlerTest : TestCommandBase
     {
         [Theory]
-        [InlineData("UHD", "ADEDBB95-18CF-432B-B7EE-D41F99C5521C")]
-        public async Task AddCategory_Id(string name, string parent)
+        [InlineData("HD", 1)]
+        public async Task AddCategory_Id(string name, long parentId)
         {
             var handler = new AddCategoryHandler(Context);
             var categoryId = await handler.Handle(
                 new AddCategoryCommand 
                 {
                     Name = name,
-                    CategoryParent = parent
+                    CategoryParent = parentId
                 },
                 CancellationToken.None);
         }

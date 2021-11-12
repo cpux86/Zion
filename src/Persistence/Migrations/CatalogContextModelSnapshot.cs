@@ -18,9 +18,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
@@ -28,8 +28,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("ParentId")
-                        .HasColumnType("TEXT");
+                    b.Property<long?>("ParentId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Path")
                         .HasColumnType("TEXT");
@@ -43,7 +43,7 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("054c0824-c5eb-47a3-b83b-04b148939681"),
+                            Id = 1L,
                             Name = "Root",
                             Path = "/"
                         });
@@ -58,12 +58,15 @@ namespace Persistence.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("TEXT");
 
+                    b.Property<long?>("CategoryId1")
+                        .HasColumnType("INTEGER");
+
                     b.Property<Guid>("OrderId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CategoryId1");
 
                     b.HasIndex("OrderId");
 
@@ -76,8 +79,8 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("CategoryId")
-                        .HasColumnType("TEXT");
+                    b.Property<long?>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Comments")
                         .HasColumnType("TEXT");
@@ -128,8 +131,8 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("CategoryId")
-                        .HasColumnType("TEXT");
+                    b.Property<long?>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("CategoryProduct")
                         .HasColumnType("INTEGER");
@@ -169,9 +172,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Entities.Catalog.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId1");
 
                     b.HasOne("Domain.Entities.OrderAggregate.Order", "Order")
                         .WithMany()

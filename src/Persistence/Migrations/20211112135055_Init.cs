@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class AddUrlToCategory : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,11 +11,12 @@ namespace Persistence.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     Path = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    ParentId = table.Column<Guid>(type: "TEXT", nullable: true)
+                    ParentId = table.Column<long>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -37,7 +38,7 @@ namespace Persistence.Migrations
                     Comments = table.Column<string>(type: "TEXT", nullable: true),
                     ImageSource = table.Column<string>(type: "TEXT", nullable: true),
                     Status = table.Column<int>(type: "INTEGER", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    CategoryId = table.Column<long>(type: "INTEGER", nullable: true),
                     CreatedOn = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "TEXT", nullable: false),
                     ModifiedOn = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
@@ -67,7 +68,7 @@ namespace Persistence.Migrations
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Price = table.Column<decimal>(type: "TEXT", nullable: false),
                     CategoryProduct = table.Column<int>(type: "INTEGER", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    CategoryId = table.Column<long>(type: "INTEGER", nullable: true),
                     OrderId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -93,17 +94,18 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     CategoryId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    CategoryId1 = table.Column<long>(type: "INTEGER", nullable: true),
                     OrderId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Publisheds", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Publisheds_Categories_CategoryId",
-                        column: x => x.CategoryId,
+                        name: "FK_Publisheds_Categories_CategoryId1",
+                        column: x => x.CategoryId1,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Publisheds_Orders_OrderId",
                         column: x => x.OrderId,
@@ -115,7 +117,7 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "Description", "Name", "ParentId", "Path" },
-                values: new object[] { new Guid("054c0824-c5eb-47a3-b83b-04b148939681"), null, "Root", null, "/" });
+                values: new object[] { 1L, null, "Root", null, "/" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_ParentId",
@@ -138,9 +140,9 @@ namespace Persistence.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Publisheds_CategoryId",
+                name: "IX_Publisheds_CategoryId1",
                 table: "Publisheds",
-                column: "CategoryId");
+                column: "CategoryId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Publisheds_OrderId",
