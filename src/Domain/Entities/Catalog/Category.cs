@@ -2,6 +2,8 @@
 using Domain.Common;
 using Domain.Entities.OrderAggregate;
 using Domain.Entities.ProductAggregate;
+using Domain.Utils;
+using NickBuhro.Translit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +28,16 @@ namespace Domain.Entities.Catalog
         /// <summary>
         /// последняя секция URL
         /// </summary>
-        public string Path { get; set; }
+        public string Slug { get; private set; }
         public string Description { get; set; }
         /// <summary>
         /// Родительская категория
         /// </summary>
-        public Category Parent { get; set; }
+        public Category Parent { get; private set; }
+        /// <summary>
+        /// Коллекция всех предков категории 
+        /// </summary>
+        public List<Category> Ancestors { get; set; }
         // дочерние категории
         public List<Category> Childrens { get; private set; } = new List<Category>();
         // Заказы. Запрос на приобретение товара, содержащий описание товара
@@ -52,6 +58,12 @@ namespace Domain.Entities.Catalog
         /// <param name="children">Новая категория</param>
         public void AddCategory(Category children)
         {
+            Category category = new Category();
+            
+            children.Parent = this;
+
+            string slug = SlugGenerator.ToUrlSlug(children.Name);
+            children.Slug = slug;
             //try
             //{
             //    var s = Guard.Against.NullOrWhiteSpace(children.Name, nameof(children.Name));
@@ -61,7 +73,7 @@ namespace Domain.Entities.Catalog
 
             //    throw;
             //}
-            
+
             //var ch = children.Name.Trim();
 
             // проверка на конфилкт имен категорий. не допускаем наличии категорий с одинаковым именем

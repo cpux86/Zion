@@ -36,8 +36,7 @@ namespace Persistence.Context
                 new Category("Root")
                 {
                     // Первоначальне значение первичного ключа не может быть null
-                    Id =  1,
-                    Path = @"/"
+                    Id =  1
                 }
                 );
             builder.Entity<Category>()

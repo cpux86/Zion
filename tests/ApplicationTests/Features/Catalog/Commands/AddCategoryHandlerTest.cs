@@ -13,7 +13,9 @@ namespace ApplicationTests.Features.Catalog.Commands
     public class AddCategoryHandlerTest : TestCommandBase
     {
         [Theory]
-        [InlineData("HD", 1)]
+        [InlineData("Электроника", 1)]
+        [InlineData("Транспорт", 1)]
+        [InlineData("Для дома и дачи", 1)]
         public async Task AddCategory_Id(string name, long parentId)
         {
             var handler = new AddCategoryHandler(Context);
@@ -21,7 +23,7 @@ namespace ApplicationTests.Features.Catalog.Commands
                 new AddCategoryCommand 
                 {
                     Name = name,
-                    CategoryParent = parentId
+                    ParentId = parentId
                 },
                 CancellationToken.None);
         }
