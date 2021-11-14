@@ -9,7 +9,7 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20211112135055_Init")]
+    [Migration("20211114200600_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,14 +18,26 @@ namespace Persistence.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.11");
 
+            modelBuilder.Entity("CategoryCategory", b =>
+                {
+                    b.Property<long>("AncestorsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("ChildrensId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AncestorsId", "ChildrensId");
+
+                    b.HasIndex("ChildrensId");
+
+                    b.ToTable("CategoryCategory");
+                });
+
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
@@ -33,7 +45,7 @@ namespace Persistence.Migrations
                     b.Property<long?>("ParentId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Path")
+                    b.Property<string>("Slug")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -46,8 +58,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1L,
-                            Name = "Root",
-                            Path = "/"
+                            Name = "Root"
                         });
                 });
 
@@ -160,12 +171,26 @@ namespace Persistence.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("CategoryCategory", b =>
+                {
+                    b.HasOne("Domain.Entities.Catalog.Category", null)
+                        .WithMany()
+                        .HasForeignKey("AncestorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Catalog.Category", null)
+                        .WithMany()
+                        .HasForeignKey("ChildrensId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
                     b.HasOne("Domain.Entities.Catalog.Category", "Parent")
-                        .WithMany("Childrens")
-                        .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .WithMany()
+                        .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
                 });
@@ -207,8 +232,6 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
-                    b.Navigation("Childrens");
-
                     b.Navigation("Orders");
 
                     b.Navigation("Products");

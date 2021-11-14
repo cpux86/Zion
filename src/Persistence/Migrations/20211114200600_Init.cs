@@ -14,8 +14,7 @@ namespace Persistence.Migrations
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
-                    Path = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Slug = table.Column<string>(type: "TEXT", nullable: true),
                     ParentId = table.Column<long>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
@@ -27,6 +26,30 @@ namespace Persistence.Migrations
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CategoryCategory",
+                columns: table => new
+                {
+                    AncestorsId = table.Column<long>(type: "INTEGER", nullable: false),
+                    ChildrensId = table.Column<long>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoryCategory", x => new { x.AncestorsId, x.ChildrensId });
+                    table.ForeignKey(
+                        name: "FK_CategoryCategory_Categories_AncestorsId",
+                        column: x => x.AncestorsId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CategoryCategory_Categories_ChildrensId",
+                        column: x => x.ChildrensId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -116,13 +139,18 @@ namespace Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "Description", "Name", "ParentId", "Path" },
-                values: new object[] { 1L, null, "Root", null, "/" });
+                columns: new[] { "Id", "Name", "ParentId", "Slug" },
+                values: new object[] { 1L, "Root", null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_ParentId",
                 table: "Categories",
                 column: "ParentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryCategory_ChildrensId",
+                table: "CategoryCategory",
+                column: "ChildrensId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_CategoryId",
@@ -152,6 +180,9 @@ namespace Persistence.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CategoryCategory");
+
             migrationBuilder.DropTable(
                 name: "Products");
 

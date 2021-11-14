@@ -14,8 +14,14 @@ namespace ApplicationTests.Features.Catalog.Commands
     {
         [Theory]
         [InlineData("Электроника", 1)]
-        [InlineData("Транспорт", 1)]
-        [InlineData("Для дома и дачи", 1)]
+        [InlineData("Телевизоры", 2)]
+        [InlineData("Мобильные телефоны", 2)]
+        [InlineData("UHD", 3)]
+        [InlineData("Sony", 4)]
+        [InlineData("Samsung", 4)]
+        [InlineData("Iphone", 4)]
+        [InlineData("Sony1.1", 6)]
+        [InlineData("Sony1.1.1", 9)]
         public async Task AddCategory_Id(string name, long parentId)
         {
             var handler = new AddCategoryHandler(Context);

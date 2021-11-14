@@ -29,28 +29,21 @@ namespace Domain.Entities.Catalog
         /// последняя секция URL
         /// </summary>
         public string Slug { get; private set; }
-        public string Description { get; set; }
+        //public long ParentId { get; set; }
         /// <summary>
         /// Родительская категория
         /// </summary>
-        public Category Parent { get; private set; }
+        public Category Parent { get; set; }
         /// <summary>
         /// Коллекция всех предков категории 
         /// </summary>
-        public List<Category> Ancestors { get; set; }
+        public List<Category> Ancestors { get; set; } = new List<Category>();
         // дочерние категории
         public List<Category> Childrens { get; private set; } = new List<Category>();
         // Заказы. Запрос на приобретение товара, содержащий описание товара
         public List<Order> Orders { get; private set; } = new List<Order>();
         // товары которые уже имеются в категории
         public List<Product> Products { get; private set; } = new List<Product>();
-        /// <summary>
-        /// Добавить описание категории
-        /// </summary>
-        public void AddDescriptionCategory(string description)
-        {
-            Description = description;
-        }
 
         /// <summary>
         /// Добавить подкатегорию
@@ -58,9 +51,13 @@ namespace Domain.Entities.Catalog
         /// <param name="children">Новая категория</param>
         public void AddCategory(Category children)
         {
-            Category category = new Category();
-            
-            children.Parent = this;
+            foreach (var item in Ancestors)
+            {
+                item.Childrens.Add(children);
+            }
+
+
+            //Childrens.Add(children);
 
             string slug = SlugGenerator.ToUrlSlug(children.Name);
             children.Slug = slug;
@@ -79,6 +76,7 @@ namespace Domain.Entities.Catalog
             // проверка на конфилкт имен категорий. не допускаем наличии категорий с одинаковым именем
             if (Childrens.Where(c=>c.Name.Equals(children.Name.Trim(), StringComparison.CurrentCultureIgnoreCase))
                 .Any()) throw new Exception(Name);
+            children.Parent = this;
             // есили новая категория с уникльным именем, то добавляем ее в коллекцию
             Childrens.Add(children);
 

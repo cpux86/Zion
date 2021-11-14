@@ -36,13 +36,16 @@ namespace Persistence.Context
                 new Category("Root")
                 {
                     // Первоначальне значение первичного ключа не может быть null
-                    Id =  1
+                    Id =  1,
                 }
                 );
             builder.Entity<Category>()
-                .HasOne(c => c.Parent)
-                .WithMany(c => c.Childrens)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasMany(c => c.Childrens)
+                .WithMany(c => c.Ancestors)
+                .UsingEntity(j => j.ToTable("CategoryCategory"));
+            builder.Entity<Category>()
+                .HasOne(c => c.Parent);
+
         }
     }
 }
