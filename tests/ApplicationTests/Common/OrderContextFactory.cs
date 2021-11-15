@@ -55,9 +55,11 @@ namespace ApplicationTests.Common
             //gStr.Add(Guid.Parse("94F85337-BB02-4E0C-8663-0C1270EC5A5F"));
             //var result = context.Orders.Where(o => gStr.Contains(o.Id)).Select(e => new { e.Title, e.Id }).ToList();
 
-            var res = context.Categories.Where(c => c.Id == 2)
+            var res = context.Categories
+                .Where(c => c.Id == 2)
                 .Include(c => c.Childrens)
-                .ThenInclude(c => c.Childrens).FirstOrDefault();
+                .ThenInclude(c => c.Childrens)
+                .FirstOrDefault();
 
 
 

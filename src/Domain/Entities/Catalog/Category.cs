@@ -57,6 +57,7 @@ namespace Domain.Entities.Catalog
             }
 
 
+
             //Childrens.Add(children);
 
             string slug = SlugGenerator.ToUrlSlug(children.Name);
