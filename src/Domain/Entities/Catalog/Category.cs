@@ -28,7 +28,7 @@ namespace Domain.Entities.Catalog
         /// <summary>
         /// последняя секция URL
         /// </summary>
-        public string Slug { get; private set; }
+        public string Slug { get; set; }
         //public long ParentId { get; set; }
         /// <summary>
         /// Родительская категория
@@ -37,13 +37,14 @@ namespace Domain.Entities.Catalog
         /// <summary>
         /// Коллекция всех предков категории 
         /// </summary>
-        public List<Category> Ancestors { get; set; } = new List<Category>();
+        public List<Category> Ancestors { get; private set; } = new List<Category>();
+        public List<Category> Nodes { get; set; } = new List<Category>();
         // дочерние категории
-        public List<Category> Childrens { get; private set; } = new List<Category>();
+        public virtual List<Category> Childrens { get; private set; } = new List<Category>();
         // Заказы. Запрос на приобретение товара, содержащий описание товара
-        public List<Order> Orders { get; private set; } = new List<Order>();
+        public virtual List<Order> Orders { get; private set; } = new List<Order>();
         // товары которые уже имеются в категории
-        public List<Product> Products { get; private set; } = new List<Product>();
+        public virtual List<Product> Products { get; private set; } = new List<Product>();
 
         /// <summary>
         /// Добавить подкатегорию
@@ -51,17 +52,26 @@ namespace Domain.Entities.Catalog
         /// <param name="children">Новая категория</param>
         public void AddCategory(Category children)
         {
-            foreach (var item in Ancestors)
-            {
-                item.Childrens.Add(children);
-            }
+            // проверка на конфилкт имен категорий. не допускаем наличии категорий с одинаковым именем
+            if (Childrens.Where(c => c.Name.Equals(children.Name.Trim(), StringComparison.CurrentCultureIgnoreCase))
+                .Any()) throw new Exception(Name);
 
-
-
-            //Childrens.Add(children);
-
+            // создаю slug для новой категории из ее имени
             string slug = SlugGenerator.ToUrlSlug(children.Name);
             children.Slug = slug;
+
+            // текущая категория является родителем для новой категории
+            children.Parent = this;
+
+            // создаю ссылку между категориями-предками и новай категорией
+            // каждая категория-предок имеет ссылку на все вложенные категории и подкатегории
+            Ancestors.ForEach(e => e.Childrens.Add(children));
+
+            // есили новая категория с уникльным именем, то добавляем ее в коллекцию
+            Childrens.Add(children);
+            Nodes.Add(children);
+
+
             //try
             //{
             //    var s = Guard.Against.NullOrWhiteSpace(children.Name, nameof(children.Name));
@@ -71,16 +81,6 @@ namespace Domain.Entities.Catalog
 
             //    throw;
             //}
-
-            //var ch = children.Name.Trim();
-
-            // проверка на конфилкт имен категорий. не допускаем наличии категорий с одинаковым именем
-            if (Childrens.Where(c=>c.Name.Equals(children.Name.Trim(), StringComparison.CurrentCultureIgnoreCase))
-                .Any()) throw new Exception(Name);
-            children.Parent = this;
-            // есили новая категория с уникльным именем, то добавляем ее в коллекцию
-            Childrens.Add(children);
-
         }
         /// <summary>
         /// Добавить продукт в категорию

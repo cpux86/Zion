@@ -9,8 +9,8 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20211114200600_Init")]
-    partial class Init
+    [Migration("20211118212815_AddCategory")]
+    partial class AddCategory
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -189,7 +189,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
                     b.HasOne("Domain.Entities.Catalog.Category", "Parent")
-                        .WithMany()
+                        .WithMany("Nodes")
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
@@ -232,6 +232,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
+                    b.Navigation("Nodes");
+
                     b.Navigation("Orders");
 
                     b.Navigation("Products");

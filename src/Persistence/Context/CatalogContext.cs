@@ -39,12 +39,20 @@ namespace Persistence.Context
                     Id =  1,
                 }
                 );
+
+            //builder.Entity<Category>()
+            //    .HasMany(c => c.Childrens)
+            //    .WithOne(c => c.Parent);
+            //builder.Entity<Category>()
+            //    .Property(b => b.Id).UseHiLo("seq");
+
             builder.Entity<Category>()
                 .HasMany(c => c.Childrens)
                 .WithMany(c => c.Ancestors)
                 .UsingEntity(j => j.ToTable("CategoryCategory"));
             builder.Entity<Category>()
-                .HasOne(c => c.Parent);
+                .HasOne(c => c.Parent)
+                .WithMany(c => c.Nodes);
 
         }
     }

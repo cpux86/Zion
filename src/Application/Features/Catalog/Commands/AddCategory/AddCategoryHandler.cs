@@ -23,7 +23,7 @@ namespace Application.Features.Catalog.Commands.AddCategory
         public async Task<long> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
         {
             // создаем новую катергорию
-            var newCategory = new Category(request.Name);
+            var subCategory = new Category(request.Name);
 
             // получаем категорию в которую необходимо встваить подкатегорию
             Category parent = _catalogContext.Categories
@@ -32,12 +32,11 @@ namespace Application.Features.Catalog.Commands.AddCategory
                 .Where(c => c.Id == request.ParentId)
                 .FirstOrDefault();
 
-            parent.AddCategory(newCategory);
-
-            //_catalogContext.Categories.Add(newCategory);
+            parent.AddCategory(subCategory);
+            
 
             await _catalogContext.SaveChangesAsync(cancellationToken);
-            return newCategory.Id;
+            return subCategory.Id;
         }
     }
 }

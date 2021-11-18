@@ -26,6 +26,7 @@ namespace ApplicationTests.Common
             var options = new DbContextOptionsBuilder<CatalogContext>()
             .UseSqlite(@"DataSource=C:\C#\Zion\DB\Zion.db").Options;
 
+            
 
             var context = new CatalogContext(options);
             //context.Database.EnsureCreated();
@@ -56,12 +57,12 @@ namespace ApplicationTests.Common
             //var result = context.Orders.Where(o => gStr.Contains(o.Id)).Select(e => new { e.Title, e.Id }).ToList();
 
             var res = context.Categories
-                .Where(c => c.Id == 2)
+                .Where(c => c.Id == 1)
                 .Include(c => c.Childrens)
-                .ThenInclude(c => c.Childrens)
                 .FirstOrDefault();
 
-
+            //context.RemoveRange(res.Childrens);
+            //context.SaveChanges();
 
             return context;
         }

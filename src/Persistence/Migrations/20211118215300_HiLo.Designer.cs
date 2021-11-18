@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Context;
@@ -9,14 +10,17 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20211115191647_Init1")]
-    partial class Init1
+    [Migration("20211118215300_HiLo")]
+    partial class HiLo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.11");
+
+            modelBuilder.HasSequence("seq")
+                .IncrementsBy(10);
 
             modelBuilder.Entity("CategoryCategory", b =>
                 {
@@ -37,7 +41,9 @@ namespace Persistence.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "seq")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
@@ -189,7 +195,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
                     b.HasOne("Domain.Entities.Catalog.Category", "Parent")
-                        .WithMany()
+                        .WithMany("Nodes")
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
@@ -232,6 +238,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
+                    b.Navigation("Nodes");
+
                     b.Navigation("Orders");
 
                     b.Navigation("Products");
