@@ -40,11 +40,6 @@ namespace Persistence.Context
                 }
                 );
 
-            //builder.Entity<Category>()
-            //    .HasMany(c => c.Childrens)
-            //    .WithOne(c => c.Parent);
-            //builder.Entity<Category>()
-            //    .Property(b => b.Id).UseHiLo("seq");
 
             builder.Entity<Category>()
                 .HasMany(c => c.Childrens)

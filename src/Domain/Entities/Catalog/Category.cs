@@ -29,7 +29,7 @@ namespace Domain.Entities.Catalog
         /// последняя секция URL
         /// </summary>
         public string Slug { get; set; }
-        //public long ParentId { get; set; }
+        
         /// <summary>
         /// Родительская категория
         /// </summary>
@@ -46,11 +46,12 @@ namespace Domain.Entities.Catalog
         // товары которые уже имеются в категории
         public virtual List<Product> Products { get; private set; } = new List<Product>();
 
+        #region CRUD v1
         /// <summary>
         /// Добавить подкатегорию
         /// </summary>
         /// <param name="children">Новая категория</param>
-        public void AddCategory(Category children)
+        public void Add(Category children)
         {
             // проверка на конфилкт имен категорий. не допускаем наличии категорий с одинаковым именем
             if (Childrens.Where(c => c.Name.Equals(children.Name.Trim(), StringComparison.CurrentCultureIgnoreCase))
@@ -82,6 +83,37 @@ namespace Domain.Entities.Catalog
             //    throw;
             //}
         }
+        #endregion
+
+        #region CRUD v2
+        public Category Add(string name)
+        {
+            // проверка на конфилкт имен категорий. не допускаем наличии категорий с одинаковым именем
+            if (Childrens.Where(c => c.Name.Equals(name.Trim(), StringComparison.CurrentCultureIgnoreCase))
+                .Any()) throw new Exception(Name);
+
+            Category children = new Category(name);
+
+            // создаю slug для новой категории из ее имени
+            string slug = SlugGenerator.ToUrlSlug(name);
+            children.Slug = slug;
+
+            // текущая категория является родителем для новой категории
+            children.Parent = this;
+
+            // создаю ссылку между категориями-предками и новай категорией
+            // каждая категория-предок имеет ссылку на все вложенные категории и подкатегории
+            Ancestors.ForEach(e => e.Childrens.Add(children));
+
+            // есили новая категория с уникльным именем, то добавляем ее в коллекцию
+            Childrens.Add(children);
+            Nodes.Add(children);
+
+            
+            return children;
+        }
+        #endregion
+
         /// <summary>
         /// Добавить продукт в категорию
         /// </summary>

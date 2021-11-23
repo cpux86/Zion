@@ -32,8 +32,17 @@ namespace Application.Features.Catalog.Commands.AddCategory
                 .Where(c => c.Id == request.ParentId)
                 .FirstOrDefault();
 
-            parent.AddCategory(subCategory);
-            
+            //parent.Add(subCategory);
+            try
+            {
+                //Category children = parent.Add(request.Name);
+                parent.Add(subCategory);
+            }
+            catch (Exception e)
+            {
+
+                //subCategory.Id = 0;
+            }
 
             await _catalogContext.SaveChangesAsync(cancellationToken);
             return subCategory.Id;
