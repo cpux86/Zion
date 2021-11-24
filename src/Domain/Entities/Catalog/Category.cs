@@ -59,6 +59,19 @@ namespace Domain.Entities.Catalog
 
             Childrens.Add(children);
         }
+
+        public void Update(string name)
+        {
+
+            // Copy-Paste!!!
+            // проверка на конфилкт имен категорий. не допускаем наличии категорий с одинаковым именем
+            if (Childrens.Where(c => c.Name.Equals(name.Trim(), StringComparison.CurrentCultureIgnoreCase))
+                .Any()) throw new Exception("Имя с заданным именем существует");
+
+            this.Name = name;
+
+            this.Slug = SlugGenerator.ToUrlSlug(name);
+        }
         #endregion
 
         #region CRUD v2
