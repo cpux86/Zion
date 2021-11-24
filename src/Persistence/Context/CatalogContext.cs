@@ -41,13 +41,13 @@ namespace Persistence.Context
                 );
 
 
-            builder.Entity<Category>()
-                .HasMany(c => c.Childrens)
-                .WithMany(c => c.Ancestors)
-                .UsingEntity(j => j.ToTable("CategoryCategory"));
-            builder.Entity<Category>()
-                .HasOne(c => c.Parent)
-                .WithMany(c => c.Nodes);
+            //builder.Entity<Category>()
+            //    .HasMany(c => c.Childrens)
+            //    .WithMany(c => c.Ancestors)
+            //    .UsingEntity(j => j.ToTable("CategoryCategory"));
+            //builder.Entity<Category>()
+            //    .HasOne(c => c.Parent)
+            //    .WithMany(c => c.Nodes);
 
         }
     }

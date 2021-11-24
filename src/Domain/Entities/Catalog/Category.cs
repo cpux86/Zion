@@ -28,17 +28,13 @@ namespace Domain.Entities.Catalog
         /// <summary>
         /// последняя секция URL
         /// </summary>
-        public string Slug { get; set; }
+        public string Slug { get; private set; }
         
         /// <summary>
         /// Родительская категория
         /// </summary>
         public Category Parent { get; set; }
-        /// <summary>
-        /// Коллекция всех предков категории 
-        /// </summary>
-        public List<Category> Ancestors { get; private set; } = new List<Category>();
-        public List<Category> Nodes { get; set; } = new List<Category>();
+
         // дочерние категории
         public virtual List<Category> Childrens { get; private set; } = new List<Category>();
         // Заказы. Запрос на приобретение товара, содержащий описание товара
@@ -61,57 +57,12 @@ namespace Domain.Entities.Catalog
             string slug = SlugGenerator.ToUrlSlug(children.Name);
             children.Slug = slug;
 
-            // текущая категория является родителем для новой категории
-            children.Parent = this;
-
-            // создаю ссылку между категориями-предками и новай категорией
-            // каждая категория-предок имеет ссылку на все вложенные категории и подкатегории
-            Ancestors.ForEach(e => e.Childrens.Add(children));
-
-            // есили новая категория с уникльным именем, то добавляем ее в коллекцию
             Childrens.Add(children);
-            Nodes.Add(children);
-
-
-            //try
-            //{
-            //    var s = Guard.Against.NullOrWhiteSpace(children.Name, nameof(children.Name));
-            //}
-            //catch (Exception e)
-            //{
-
-            //    throw;
-            //}
         }
         #endregion
 
         #region CRUD v2
-        public Category Add(string name)
-        {
-            // проверка на конфилкт имен категорий. не допускаем наличии категорий с одинаковым именем
-            if (Childrens.Where(c => c.Name.Equals(name.Trim(), StringComparison.CurrentCultureIgnoreCase))
-                .Any()) throw new Exception(Name);
 
-            Category children = new Category(name);
-
-            // создаю slug для новой категории из ее имени
-            string slug = SlugGenerator.ToUrlSlug(name);
-            children.Slug = slug;
-
-            // текущая категория является родителем для новой категории
-            children.Parent = this;
-
-            // создаю ссылку между категориями-предками и новай категорией
-            // каждая категория-предок имеет ссылку на все вложенные категории и подкатегории
-            Ancestors.ForEach(e => e.Childrens.Add(children));
-
-            // есили новая категория с уникльным именем, то добавляем ее в коллекцию
-            Childrens.Add(children);
-            Nodes.Add(children);
-
-            
-            return children;
-        }
         #endregion
 
         /// <summary>

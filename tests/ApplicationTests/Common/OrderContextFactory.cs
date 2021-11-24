@@ -55,11 +55,11 @@ namespace ApplicationTests.Common
             //gStr.Add(Guid.Parse("8118CEF9-1CC3-469A-B500-4435657A416D"));
             //gStr.Add(Guid.Parse("94F85337-BB02-4E0C-8663-0C1270EC5A5F"));
             //var result = context.Orders.Where(o => gStr.Contains(o.Id)).Select(e => new { e.Title, e.Id }).ToList();
-
-            var res = context.Categories
-                .Where(c => c.Id == 1)
-                .Include(c => c.Childrens)
-                .FirstOrDefault();
+            //context.Categories.ToList();
+            //var res = context.Categories
+            //    .ToList()
+            //    .Where(c => c.Name == "Root")
+            //    .FirstOrDefault();
 
             //context.RemoveRange(res.Childrens);
             //context.SaveChanges();

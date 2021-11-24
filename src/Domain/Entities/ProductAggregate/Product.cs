@@ -27,7 +27,7 @@ namespace Domain.Entities.ProductAggregate
         /// <summary>
         /// Категория в которую входит продукт
         /// </summary>a
-        public int CategoryProduct { get; set; }
+        //public int CategoryProduct { get; set; }
 
         private Product()
         {

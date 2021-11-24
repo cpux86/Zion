@@ -22,11 +22,14 @@ namespace Application.Features.Catalog.Queries.GetCategoriesList
 
         public async Task<MenuViewModele> Handle(GetCategoriesListQuery request, CancellationToken cancellationToken)
         {
-            Category res = await _catalogContext.Categories
-                .Where(c => c.Id == 1)
-                .Include(c => c.Childrens)
-                .FirstOrDefaultAsync();
-            return new MenuViewModele { Menu = res };
+            // подгружаю все категории в контекст
+            await _catalogContext.Categories.ToListAsync(cancellationToken);
+
+            Category result = _catalogContext.Categories
+                .Where(e => e.Name == "Root")
+                .FirstOrDefault();
+
+            return new MenuViewModele { Menu = result.Childrens };
         }
     }
 }

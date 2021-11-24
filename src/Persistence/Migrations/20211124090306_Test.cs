@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class Init : Migration
+    public partial class Test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,30 +26,6 @@ namespace Persistence.Migrations
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CategoryCategory",
-                columns: table => new
-                {
-                    AncestorsId = table.Column<long>(type: "INTEGER", nullable: false),
-                    ChildrensId = table.Column<long>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CategoryCategory", x => new { x.AncestorsId, x.ChildrensId });
-                    table.ForeignKey(
-                        name: "FK_CategoryCategory_Categories_AncestorsId",
-                        column: x => x.AncestorsId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CategoryCategory_Categories_ChildrensId",
-                        column: x => x.ChildrensId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -148,11 +124,6 @@ namespace Persistence.Migrations
                 column: "ParentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoryCategory_ChildrensId",
-                table: "CategoryCategory",
-                column: "ChildrensId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Orders_CategoryId",
                 table: "Orders",
                 column: "CategoryId");
@@ -180,9 +151,6 @@ namespace Persistence.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "CategoryCategory");
-
             migrationBuilder.DropTable(
                 name: "Products");
 

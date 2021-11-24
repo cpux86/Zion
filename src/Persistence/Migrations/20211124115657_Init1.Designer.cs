@@ -9,29 +9,14 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20211123080830_Init")]
-    partial class Init
+    [Migration("20211124115657_Init1")]
+    partial class Init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.11");
-
-            modelBuilder.Entity("CategoryCategory", b =>
-                {
-                    b.Property<long>("AncestorsId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long>("ChildrensId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("AncestorsId", "ChildrensId");
-
-                    b.HasIndex("ChildrensId");
-
-                    b.ToTable("CategoryCategory");
-                });
 
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
@@ -147,9 +132,6 @@ namespace Persistence.Migrations
                     b.Property<long?>("CategoryId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CategoryProduct")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
@@ -171,25 +153,10 @@ namespace Persistence.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("CategoryCategory", b =>
-                {
-                    b.HasOne("Domain.Entities.Catalog.Category", null)
-                        .WithMany()
-                        .HasForeignKey("AncestorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Catalog.Category", null)
-                        .WithMany()
-                        .HasForeignKey("ChildrensId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
                     b.HasOne("Domain.Entities.Catalog.Category", "Parent")
-                        .WithMany("Nodes")
+                        .WithMany("Childrens")
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
@@ -232,7 +199,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
-                    b.Navigation("Nodes");
+                    b.Navigation("Childrens");
 
                     b.Navigation("Orders");
 

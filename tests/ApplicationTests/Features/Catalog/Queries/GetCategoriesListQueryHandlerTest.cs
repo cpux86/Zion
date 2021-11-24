@@ -17,7 +17,9 @@ namespace ApplicationTests.Features.Catalog.Queries
         public async Task GetMenu_Menu()
         {
             var handler = new GetCategoriesListQueryHandler(Context);
-            var catalog = await handler.Handle(new GetCategoriesListQuery(), CancellationToken.None);
+            MenuViewModele menu = await handler.Handle(new GetCategoriesListQuery(), CancellationToken.None);
+            //
+            Assert.True(menu.Menu.Count() > 0);
         }
     }
 }
