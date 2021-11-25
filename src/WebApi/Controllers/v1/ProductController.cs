@@ -9,11 +9,12 @@ namespace WebApi.Controllers.v1
     [ApiVersion("1.0")]
     public class ProductController : BaseApiController
     {
-        [Route("{id}/[action]")]
-        [HttpPost]
-        public async Task<MenuViewModele> Create(GetCategoriesListQuery command)
+        //[Route("{id}/[action]")]
+        [HttpGet]
+        public async Task<MenuViewModele> Create()
         {
-            return await Mediator.Send(command);
+            var query = new GetCategoriesListQuery();
+            return await Mediator.Send(query);
             //return new Response<int>("готово");
         }
 

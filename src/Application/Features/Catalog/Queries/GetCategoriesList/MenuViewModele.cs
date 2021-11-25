@@ -9,6 +9,7 @@ namespace Application.Features.Catalog.Queries.GetCategoriesList
 {
     public class MenuViewModele
     {
-        public IEnumerable<Category> Menu { get; set; }
+        public string Name { get; set; }
+        public IEnumerable<Category> Childrens { get; set; }
     }
 }

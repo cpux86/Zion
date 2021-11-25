@@ -1,5 +1,7 @@
 ﻿
+using Application.Features.Catalog.Queries.GetCategoriesList;
 using AutoMapper;
+using Domain.Entities.Catalog;
 using Domain.Entities.ProductAggregate;
 
 namespace Application.Mappings
@@ -8,7 +10,7 @@ namespace Application.Mappings
     {
         public GeneralProfile()
         {
-            //CreateMap<SaveProductCommand, Product>();
+            CreateMap <Category, MenuViewModele>();
         }
     }
 }

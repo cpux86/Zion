@@ -8,31 +8,34 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper.QueryableExtensions;
+using AutoMapper;
 
 namespace Application.Features.Catalog.Queries.GetCategoriesList
 {
     public class GetCategoriesListQueryHandler : IRequestHandler<GetCategoriesListQuery, MenuViewModele>
     {
         private readonly ICatalogContext _catalogContext;
+        private readonly IMapper _mapper;
 
-        public GetCategoriesListQueryHandler(ICatalogContext catalogContext)
+        public GetCategoriesListQueryHandler(ICatalogContext catalogContext, IMapper mapper)
         {
             _catalogContext = catalogContext;
+            _mapper = mapper;
         }
 
         public async Task<MenuViewModele> Handle(GetCategoriesListQuery request, CancellationToken cancellationToken)
         {
             // подгружаю все категории в контекст
-            await _catalogContext.Categories
-                .Include(e=>e.Childrens)
-                .ToListAsync(cancellationToken);
+            //await _catalogContext.Categories
+            //    .Include(e => e.Childrens)
+            //    .ToListAsync(cancellationToken);
 
-            Category result = _catalogContext.Categories
+            MenuViewModele wm = await _catalogContext.Categories
                 .Where(e => e.Name == "Root")
-                
-                .FirstOrDefault();
-
-            return new MenuViewModele { Menu = result.Childrens };
+                .ProjectTo<MenuViewModele>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
+            return wm;
         }
     }
 }
