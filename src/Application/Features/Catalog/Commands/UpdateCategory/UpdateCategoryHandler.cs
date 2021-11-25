@@ -23,15 +23,24 @@ namespace Application.Features.Catalog.Commands.UpdateCategory
         public async Task<Unit> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
             // получаю категорию для обнавления
-            Category category = _catalogContext.Categories
+            Category deletedCategory = _catalogContext.Categories
                 .Where(c => c.Id == request.Id)
-                //.Include(c => c.Childrens)
                 .Include(p=>p.Parent)
                 .FirstOrDefault();
+            if (deletedCategory == null) throw new Exception("Category not found");
+            // проверяю, будет ли конфиктовать переименованная категория с другими категориями
+            bool exist = _catalogContext.Categories
+                .Where(c => c.Parent.Id == deletedCategory.Parent.Id && c.Id != request.Id)
+                .Any(e => e.Name == request.Name);
+
+            if (exist) throw new Exception("Конфликт имен");
+
+            
+            deletedCategory.Update(request.Name);
 
 
-            if (category == null) throw new Exception("Категория не найдена");
-            category.Update(request.Name);
+
+
             await _catalogContext.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }

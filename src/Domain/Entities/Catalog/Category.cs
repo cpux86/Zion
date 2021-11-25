@@ -33,7 +33,7 @@ namespace Domain.Entities.Catalog
         /// <summary>
         /// Родительская категория
         /// </summary>
-        public Category Parent { get; set; }
+        public virtual Category Parent { get; private set; }
 
         // дочерние категории
         public virtual List<Category> Childrens { get; private set; } = new List<Category>();
@@ -51,7 +51,7 @@ namespace Domain.Entities.Catalog
         {
             // проверка на конфилкт имен категорий. не допускаем наличии категорий с одинаковым именем
             if (Childrens.Where(c => c.Name.Equals(children.Name.Trim(), StringComparison.CurrentCultureIgnoreCase))
-                .Any()) throw new Exception(Name);
+                .Any()) throw new Exception("Конфликт имен");
 
             // создаю slug для новой категории из ее имени
             string slug = SlugGenerator.ToUrlSlug(children.Name);
@@ -62,12 +62,6 @@ namespace Domain.Entities.Catalog
 
         public void Update(string name)
         {
-
-            // Copy-Paste!!!
-            // проверка на конфилкт имен категорий. не допускаем наличии категорий с одинаковым именем
-            if (Childrens.Where(c => c.Name.Equals(name.Trim(), StringComparison.CurrentCultureIgnoreCase))
-                .Any()) throw new Exception("Имя с заданным именем существует");
-
             this.Name = name;
 
             this.Slug = SlugGenerator.ToUrlSlug(name);

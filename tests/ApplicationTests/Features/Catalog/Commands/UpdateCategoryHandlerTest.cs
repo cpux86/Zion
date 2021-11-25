@@ -13,7 +13,7 @@ namespace ApplicationTests.Features.Catalog.Commands
     public class UpdateCategoryHandlerTest : TestCommandBase
     {
         [Theory]
-        [InlineData(2, "Электроника")]
+        [InlineData(5, "Телевизоры")]
         public async void UpdateCategory(long id, string name)
         {
             var handler = new UpdateCategoryHandler(Context);

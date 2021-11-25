@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class Test : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,7 +66,6 @@ namespace Persistence.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Price = table.Column<decimal>(type: "TEXT", nullable: false),
-                    CategoryProduct = table.Column<int>(type: "INTEGER", nullable: false),
                     CategoryId = table.Column<long>(type: "INTEGER", nullable: true),
                     OrderId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },

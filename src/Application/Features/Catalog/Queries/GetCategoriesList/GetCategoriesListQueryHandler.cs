@@ -23,10 +23,13 @@ namespace Application.Features.Catalog.Queries.GetCategoriesList
         public async Task<MenuViewModele> Handle(GetCategoriesListQuery request, CancellationToken cancellationToken)
         {
             // подгружаю все категории в контекст
-            await _catalogContext.Categories.ToListAsync(cancellationToken);
+            await _catalogContext.Categories
+                .Include(e=>e.Childrens)
+                .ToListAsync(cancellationToken);
 
             Category result = _catalogContext.Categories
                 .Where(e => e.Name == "Root")
+                
                 .FirstOrDefault();
 
             return new MenuViewModele { Menu = result.Childrens };
