@@ -9,7 +9,7 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20211125145243_Init")]
+    [Migration("20211126131927_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,9 @@ namespace Persistence.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
@@ -156,7 +159,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
                     b.HasOne("Domain.Entities.Catalog.Category", "Parent")
-                        .WithMany("Childrens")
+                        .WithMany("Categories")
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
@@ -199,7 +202,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
                 {
-                    b.Navigation("Childrens");
+                    b.Navigation("Categories");
 
                     b.Navigation("Orders");
 

@@ -10,7 +10,12 @@ namespace Application.Mappings
     {
         public GeneralProfile()
         {
-            CreateMap <Category, MenuViewModele>();
+            AllowNullCollections = true;
+            CreateMap<Category, MenuViewModele>()
+                .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.Categories))
+                .ForMember(dest => dest.Url, opt => opt.MapFrom(src =>src.Parent.Slug+"/"+ src.Slug+"-"+src.Id))
+                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl));
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Persistence.Context;
+﻿using Application.Interfaces;
+using Persistence.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ApplicationTests.Common
 {
     public abstract class TestCommandBase : IDisposable
     {
-        protected readonly CatalogContext Context;
+        protected readonly ICatalogContext Context;
         public TestCommandBase()
         {
             Context = OrderContextFactory.Create();

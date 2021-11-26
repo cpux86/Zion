@@ -27,15 +27,15 @@ namespace Application.Features.Catalog.Queries.GetCategoriesList
         public async Task<MenuViewModele> Handle(GetCategoriesListQuery request, CancellationToken cancellationToken)
         {
             // подгружаю все категории в контекст
-            //await _catalogContext.Categories
-            //    .Include(e => e.Childrens)
-            //    .ToListAsync(cancellationToken);
+            var allMunuList = await _catalogContext.Categories
+                //.Include(e => e.Childrens)
+                .ToListAsync(cancellationToken);
+           //var  w = wm.FirstOrDefault();
 
-            MenuViewModele wm = await _catalogContext.Categories
-                .Where(e => e.Name == "Root")
-                .ProjectTo<MenuViewModele>(_mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync();
-            return wm;
+            //Category wm = await _catalogContext.Categories
+            //    .Where(e => e.Name == "Root")
+            //    .FirstOrDefaultAsync();
+            return _mapper.Map<MenuViewModele>(allMunuList.FirstOrDefault());
         }
     }
 }

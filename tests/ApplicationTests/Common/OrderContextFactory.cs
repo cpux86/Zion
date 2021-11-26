@@ -1,20 +1,26 @@
-﻿using Domain.Entities.Catalog;
+﻿using Application.Interfaces;
+using Domain.Entities.Catalog;
 using Domain.Entities.OrderAggregate;
+using Domain.Entities.ProductAggregate;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ApplicationTests.Common
 {
-    public class OrderContextFactory
+    public class OrderContextFactory : ICatalogContext
     {
         const string User1 = "295005a2-9b2a-400a-a85b-87c08719b40a";
         const string User2 = "295005a2-9b2a-400a-a85b-87c08719baaa";
 
+        public DbSet<Category> Categories { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DbSet<Product> Products { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DbSet<Order> Orders { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public static CatalogContext Create()
         {
@@ -65,6 +71,11 @@ namespace ApplicationTests.Common
             //context.SaveChanges();
 
             return context;
+        }
+
+        public Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

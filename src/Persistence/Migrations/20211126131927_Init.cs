@@ -14,6 +14,7 @@ namespace Persistence.Migrations
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
                     Slug = table.Column<string>(type: "TEXT", nullable: true),
                     ParentId = table.Column<long>(type: "INTEGER", nullable: true)
                 },
@@ -114,8 +115,8 @@ namespace Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "Name", "ParentId", "Slug" },
-                values: new object[] { 1L, "Root", null, null });
+                columns: new[] { "Id", "ImageUrl", "Name", "ParentId", "Slug" },
+                values: new object[] { 1L, null, "Root", null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_ParentId",

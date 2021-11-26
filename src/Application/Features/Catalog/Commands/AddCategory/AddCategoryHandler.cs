@@ -28,7 +28,7 @@ namespace Application.Features.Catalog.Commands.AddCategory
             // получаем категорию в которую необходимо встваить подкатегорию
             Category parent = _catalogContext.Categories
                 // подгружаем ее дочернии категории
-                .Include(c => c.Childrens)
+                .Include(c => c.Categories)
                 .Where(c => c.Id == request.ParentId)
                 .FirstOrDefault();
 

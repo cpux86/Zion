@@ -26,6 +26,10 @@ namespace Domain.Entities.Catalog
         public long Id { get; set; }
         public string Name { get; private set; }
         /// <summary>
+        /// Путь к файлу изображения категории
+        /// </summary>
+        public string ImageUrl { get; private set; }
+        /// <summary>
         /// последняя секция URL
         /// </summary>
         public string Slug { get; private set; }
@@ -36,11 +40,11 @@ namespace Domain.Entities.Catalog
         public virtual Category Parent { get; private set; }
 
         // дочерние категории
-        public virtual List<Category> Childrens { get; private set; } = new List<Category>();
+        public virtual List<Category> Categories { get; private set; }
         // Заказы. Запрос на приобретение товара, содержащий описание товара
-        public virtual List<Order> Orders { get; private set; } = new List<Order>();
+        public virtual List<Order> Orders { get; private set; }
         // товары которые уже имеются в категории
-        public virtual List<Product> Products { get; private set; } = new List<Product>();
+        public virtual List<Product> Products { get; private set; }
 
         #region CRUD v1
         /// <summary>
@@ -50,14 +54,14 @@ namespace Domain.Entities.Catalog
         public void Add(Category children)
         {
             // проверка на конфилкт имен категорий. не допускаем наличии категорий с одинаковым именем
-            if (Childrens.Where(c => c.Name.Equals(children.Name.Trim(), StringComparison.CurrentCultureIgnoreCase))
+            if (Categories.Where(c => c.Name.Equals(children.Name.Trim(), StringComparison.CurrentCultureIgnoreCase))
                 .Any()) throw new Exception("Конфликт имен");
 
             // создаю slug для новой категории из ее имени
             string slug = SlugGenerator.ToUrlSlug(children.Name);
             children.Slug = slug;
 
-            Childrens.Add(children);
+            Categories.Add(children);
         }
 
         public void Update(string name)
@@ -66,10 +70,6 @@ namespace Domain.Entities.Catalog
 
             this.Slug = SlugGenerator.ToUrlSlug(name);
         }
-        #endregion
-
-        #region CRUD v2
-
         #endregion
 
         /// <summary>
