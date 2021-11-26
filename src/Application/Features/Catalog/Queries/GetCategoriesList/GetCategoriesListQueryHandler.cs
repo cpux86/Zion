@@ -35,7 +35,8 @@ namespace Application.Features.Catalog.Queries.GetCategoriesList
             //Category wm = await _catalogContext.Categories
             //    .Where(e => e.Name == "Root")
             //    .FirstOrDefaultAsync();
-            return _mapper.Map<MenuViewModele>(allMunuList.FirstOrDefault());
+            var res = _mapper.Map<MenuViewModele>(allMunuList.FirstOrDefault());
+            return res;
         }
     }
 }

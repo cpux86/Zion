@@ -13,6 +13,10 @@
             Succeeded = false;
             Message = message;
         }
+        public Response(bool status)
+        {
+            Succeeded = status;
+        }
 
         public bool Succeeded { get; set; }
         public string Message { get; set; }

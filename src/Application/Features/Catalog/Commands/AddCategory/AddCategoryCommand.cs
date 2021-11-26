@@ -14,6 +14,6 @@ namespace Application.Features.Catalog.Commands.AddCategory
         /// <summary>
         /// Назначение. Родительская категория
         /// </summary>
-        public long ParentId { get; set; } = 1;
+        public long ParentId { get; set; }
     }
 }
