@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.Common.Exceptions;
+using Application.Interfaces;
 using Domain.Entities.Catalog;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -31,18 +32,17 @@ namespace Application.Features.Catalog.Commands.AddCategory
                 .Include(c => c.Categories)
                 .Where(c => c.Id == request.ParentId)
                 .FirstOrDefault();
-
-            //parent.Add(subCategory);
+            if (parent == null) return subCategory.Id;
+            //if (parent == null) throw new NotFoundException("Category Not Found");
             try
             {
-                //Category children = parent.Add(request.Name);
                 parent.Add(subCategory);
             }
-            catch (Exception e)
+            catch(Exception e)
             {
-
-                //subCategory.Id = 0;
+                return subCategory.Id;
             }
+            
 
             await _catalogContext.SaveChangesAsync(cancellationToken);
             return subCategory.Id;

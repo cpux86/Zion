@@ -1,5 +1,6 @@
 ﻿
 using Application.Features.Catalog.Commands.AddCategory;
+using Application.Features.Catalog.Commands.DeleteCategory;
 using Application.Features.Catalog.Queries.GetCategoriesList;
 using Application.Wrappers;
 using Microsoft.AspNetCore.Mvc;
@@ -21,14 +22,24 @@ namespace WebApi.Controllers.v1
             return Ok(vm);
         }
         // Вставить новую категорию
-        [Route("{id}")]
+        //[Route("{id}")]
         [HttpPost]
-        public async Task<ActionResult<Response<bool>>> Create([FromHeader] AddCategoryCommand command, [FromQuery] long id)
+        public async Task<ActionResult<Response<string>>> Create([FromHeader] AddCategoryCommand command)
         {
-            var i = id;
-            //var query = new GetCategoriesListQuery();
-            //var menu = await Mediator.Send(query);
-            var vm =  new Response<bool>(true);
+            var status = await Mediator.Send(command);
+            if(status == 0) return new Response<string>();
+            var vm =  new Response<long>(status);
+            return Ok(vm);
+        }
+        // Удалить категорию
+        [Route("{id}")]
+        [HttpDelete]
+        public async Task<ActionResult<Response<string>>> Delete(long id)
+        {
+            var command = new DeleteCategoryCommand { Id = id };
+            var status = await Mediator.Send(command);
+            if (!status) return new Response<string>();
+            var vm = new Response<bool>(status);
             return Ok(vm);
         }
 

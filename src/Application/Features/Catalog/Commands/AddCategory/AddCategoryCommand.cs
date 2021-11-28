@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Domain.Entities.Catalog;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;

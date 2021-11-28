@@ -24,8 +24,17 @@ namespace Application.Features.Catalog.Commands.DeleteCategory
             Category category = await _catalogContext.Categories.FindAsync(request.Id);
             // если запрошенной категори не существует, то возращаем false
             if (category == null) return false;
-            _catalogContext.Categories.Remove(category);
-            await _catalogContext.SaveChangesAsync(cancellationToken);
+            try
+            {
+                _catalogContext.Categories.Remove(category);
+                await _catalogContext.SaveChangesAsync(cancellationToken);
+            }
+            catch (Exception e)
+            {
+
+                return false;
+            }
+            
             return true;   
             
         }

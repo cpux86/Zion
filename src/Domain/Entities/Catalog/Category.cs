@@ -21,6 +21,7 @@ namespace Domain.Entities.Catalog
         public Category(string name)
         {
             Name = name;
+            Slug = SlugGenerator.ToUrlSlug(name);
         }
 
         public long Id { get; set; }
@@ -58,8 +59,8 @@ namespace Domain.Entities.Catalog
                 .Any()) throw new Exception("Конфликт имен");
 
             // создаю slug для новой категории из ее имени
-            string slug = SlugGenerator.ToUrlSlug(children.Name);
-            children.Slug = slug;
+            //string slug = SlugGenerator.ToUrlSlug(children.Name);
+            //children.Slug = slug;
 
             Categories.Add(children);
         }
