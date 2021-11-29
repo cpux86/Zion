@@ -38,11 +38,11 @@ namespace Application.Features.Catalog.Commands.AddCategory
             {
                 parent.Add(subCategory);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return subCategory.Id;
             }
-            
+
 
             await _catalogContext.SaveChangesAsync(cancellationToken);
             return subCategory.Id;

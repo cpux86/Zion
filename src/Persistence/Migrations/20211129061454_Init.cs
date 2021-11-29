@@ -2,37 +2,26 @@
 
 namespace Persistence.Migrations
 {
-    public partial class AddLevel : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "Lavel",
+            migrationBuilder.UpdateData(
                 table: "Categories",
-                type: "INTEGER",
-                nullable: false,
-                defaultValue: 0);
+                keyColumn: "Id",
+                keyValue: 1L,
+                columns: new[] { "Name", "Slug" },
+                values: new object[] { "Root", "root" });
+        }
 
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
             migrationBuilder.UpdateData(
                 table: "Categories",
                 keyColumn: "Id",
                 keyValue: 1L,
                 columns: new[] { "Name", "Slug" },
                 values: new object[] { "Root1", "root1" });
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "Lavel",
-                table: "Categories");
-
-            migrationBuilder.UpdateData(
-                table: "Categories",
-                keyColumn: "Id",
-                keyValue: 1L,
-                columns: new[] { "Name", "Slug" },
-                values: new object[] { "Root", null });
         }
     }
 }

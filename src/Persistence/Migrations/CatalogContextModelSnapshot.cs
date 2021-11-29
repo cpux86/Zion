@@ -48,8 +48,8 @@ namespace Persistence.Migrations
                         {
                             Id = 1L,
                             Lavel = 0,
-                            Name = "Root1",
-                            Slug = "root1"
+                            Name = "Root",
+                            Slug = "root"
                         });
                 });
 

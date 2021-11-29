@@ -9,8 +9,8 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20211128204701_AddLevel")]
-    partial class AddLevel
+    [Migration("20211129061454_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,8 +50,8 @@ namespace Persistence.Migrations
                         {
                             Id = 1L,
                             Lavel = 0,
-                            Name = "Root1",
-                            Slug = "root1"
+                            Name = "Root",
+                            Slug = "root"
                         });
                 });
 

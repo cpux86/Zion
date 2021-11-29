@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Persistence;
 using Newtonsoft.Json;
+using WebApi.Middleware;
 
 namespace WebApi
 {
@@ -22,9 +23,11 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
             services.AddApplication();
             services.AddPersistence();
+            services.AddControllers();
+            
+            
 
             services.AddApiVersioning(config =>
             {
@@ -32,6 +35,7 @@ namespace WebApi
                 config.AssumeDefaultVersionWhenUnspecified = true;
                 config.ReportApiVersions = true;
             });
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,12 +45,15 @@ namespace WebApi
             {              
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCustomExceptionHandler();
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+
 
             app.UseEndpoints(endpoints =>
             {
