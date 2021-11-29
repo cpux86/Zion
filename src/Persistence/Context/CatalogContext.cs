@@ -33,10 +33,10 @@ namespace Persistence.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Category>().HasData(
-                new Category("Root1")
+                new Category("Root")
                 {
                     // Первоначальне значение первичного ключа не может быть null
-                    Id =  1,
+                    Id =  1
                 }
                 );
 

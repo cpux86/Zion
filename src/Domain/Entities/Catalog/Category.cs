@@ -12,7 +12,8 @@ namespace Domain.Entities.Catalog
 {
     public class Category
     {
-
+        // Максимальная глубина вложенности меню
+        const int _maxDeph = 3;
         private Category()
         {
             // Требуется для EF
@@ -21,6 +22,7 @@ namespace Domain.Entities.Catalog
         public Category(string name)
         {
             Name = name;
+            // создаю slug для новой категории из ее имени
             Slug = SlugGenerator.ToUrlSlug(name);
         }
 
@@ -35,6 +37,8 @@ namespace Domain.Entities.Catalog
         /// </summary>
         public string Slug { get; private set; }
         
+
+        public int Lavel { get; private set; }
         /// <summary>
         /// Родительская категория
         /// </summary>
@@ -57,10 +61,13 @@ namespace Domain.Entities.Catalog
             // проверка на конфилкт имен категорий. не допускаем наличии категорий с одинаковым именем
             if (Categories.Where(c => c.Name.Equals(children.Name.Trim(), StringComparison.CurrentCultureIgnoreCase))
                 .Any()) throw new Exception("Конфликт имен");
-
-            // создаю slug для новой категории из ее имени
-            //string slug = SlugGenerator.ToUrlSlug(children.Name);
-            //children.Slug = slug;
+            
+            // вычисляю значение глубины для  новой категории
+            int level = Lavel + 1;
+            // проверяю, не достигла новая категория максимальной глубины
+            if (level > _maxDeph) throw new Exception("Ограничение глубины вложения");
+            // устанавливаю значение глубины для новой категории
+            children.Lavel = level;
 
             Categories.Add(children);
         }

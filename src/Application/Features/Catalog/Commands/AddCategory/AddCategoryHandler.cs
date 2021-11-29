@@ -33,7 +33,7 @@ namespace Application.Features.Catalog.Commands.AddCategory
                 .Where(c => c.Id == request.ParentId)
                 .FirstOrDefault();
             if (parent == null) return subCategory.Id;
-            //if (parent == null) throw new NotFoundException("Category Not Found");
+
             try
             {
                 parent.Add(subCategory);
