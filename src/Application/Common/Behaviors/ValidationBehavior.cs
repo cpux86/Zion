@@ -28,7 +28,7 @@ namespace Application.Common.Behaviors
                 .ToList();
             if (failures.Count != 0)
             {
-                throw new ValidationException(failures);
+                throw new ValidationException(failures.FirstOrDefault().ErrorMessage);
             }
             return next();
         }

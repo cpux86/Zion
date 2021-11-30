@@ -5,6 +5,7 @@ using System.Text.Json;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Application.Common.Exceptions;
+using Application.Wrappers;
 
 namespace WebApi.Middleware
 {
@@ -35,7 +36,8 @@ namespace WebApi.Middleware
             {
                 case ValidationException validationException:
                     code = HttpStatusCode.BadRequest;
-                    result = JsonSerializer.Serialize(validationException.Errors);
+                    //result = JsonSerializer.Serialize(validationException.Errors);
+                    result = JsonSerializer.Serialize(new Response<string>(exception.Message));
                     break;
                 case NotFoundException:
                     code = HttpStatusCode.NotFound;
@@ -46,7 +48,7 @@ namespace WebApi.Middleware
 
             if (result == string.Empty)
             {
-                result = JsonSerializer.Serialize(new { errpr = exception.Message });
+                result = JsonSerializer.Serialize(new { error = exception.Message });
             }
 
             return context.Response.WriteAsync(result);

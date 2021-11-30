@@ -15,12 +15,14 @@ namespace Application
         /// <param name="services"></param>
         public static void AddApplication(this IServiceCollection services)
         {
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddValidatorsFromAssemblies(new[] { Assembly.GetExecutingAssembly() });
-
             services.AddTransient(typeof(IPipelineBehavior<,>),
                 typeof(ValidationBehavior<,>));
+            services.AddValidatorsFromAssemblies(new[] { Assembly.GetExecutingAssembly() });
+         
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            
         }
     }
 }

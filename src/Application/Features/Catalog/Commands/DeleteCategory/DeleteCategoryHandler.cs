@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.Common.Exceptions;
+using Application.Interfaces;
 using Domain.Entities.Catalog;
 using MediatR;
 using System;
@@ -23,7 +24,7 @@ namespace Application.Features.Catalog.Commands.DeleteCategory
         {
             Category category = await _catalogContext.Categories.FindAsync(request.Id);
             // если запрошенной категори не существует, то возращаем false
-            if (category == null) return false;
+            if (category == null) throw new NotFoundException(String.Format("категории с id {0} не найдена!",request.Id));
             try
             {
                 _catalogContext.Categories.Remove(category);

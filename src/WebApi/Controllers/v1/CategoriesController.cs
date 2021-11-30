@@ -35,7 +35,7 @@ namespace WebApi.Controllers.v1
         [HttpPost]
         public async Task<ActionResult<Response<string>>> Create([FromHeader] CreateCategoryDto dto)
         {
-            var command = new AddCategoryCommand { Name = "555555", ParentId = 1 };
+            var command = new AddCategoryCommand { Name = dto.Name, ParentId = dto.ParentId };
             var status = await Mediator.Send(command);
             if (status == 0) return new Response<string>();
             var vm = new Response<long>(status);
