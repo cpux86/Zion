@@ -42,13 +42,18 @@ namespace WebApi.Middleware
                 case NotFoundException:
                     code = HttpStatusCode.NotFound;
                     break;
+                case BadRequestException:
+                    code = HttpStatusCode.BadRequest;
+                    result = JsonSerializer.Serialize(new Response<string>("bad request"));
+                    break;
             }
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
 
             if (result == string.Empty)
             {
-                result = JsonSerializer.Serialize(new { error = exception.Message });
+                //result = JsonSerializer.Serialize(new { error = exception.Message });
+                result = JsonSerializer.Serialize(new Response<string>());
             }
 
             return context.Response.WriteAsync(result);

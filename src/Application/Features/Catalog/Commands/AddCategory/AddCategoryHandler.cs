@@ -34,14 +34,15 @@ namespace Application.Features.Catalog.Commands.AddCategory
                 .FirstOrDefault();
             if (parent == null) return subCategory.Id;
 
-            try
-            {
-                parent.Add(subCategory);
-            }
-            catch (Exception e)
-            {
-                return subCategory.Id;
-            }
+            parent.Add(subCategory);
+            //try
+            //{
+                
+            //}
+            //catch (Exception e)
+            //{
+            //    return subCategory.Id;
+            //}
 
 
             await _catalogContext.SaveChangesAsync(cancellationToken);

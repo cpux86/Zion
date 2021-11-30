@@ -1,27 +1,29 @@
-﻿namespace Application.Wrappers
+﻿
+
+namespace Application.Wrappers
 {
     public class Response<T>
     {
         public Response(T data, string message = null)
         {
-            Succeeded = true;
-            Message = message;
-            Data = data;
+            succeeded = true;
+            this.message = message;
+            this.data = data;
         }
         public Response(string message)
         {
-            Succeeded = false;
-            Message = message;
+            succeeded = false;
+            this.message = message;
         }
 
         public Response()
         {
-            Succeeded = false;
-            Message = "error";
+            succeeded = false;
+            message = "error";
         }
 
-        public bool Succeeded { get; set; }
-        public string Message { get; set; }
-        public T Data { get; set; }
+        public bool succeeded { get; set; }
+        public string message { get; set; }
+        public T data { get; set; }
     }
 }

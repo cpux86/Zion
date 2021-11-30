@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Catalog.Commands.DeleteCategory
 {
-    public class DeleteCategoryHandler : IRequestHandler<DeleteCategoryCommand, bool>
+    public class DeleteCategoryHandler : IRequestHandler<DeleteCategoryCommand>
     {
         private readonly ICatalogContext _catalogContext;
 
@@ -20,11 +20,12 @@ namespace Application.Features.Catalog.Commands.DeleteCategory
             _catalogContext = catalogContext;
         }
 
-        public async Task<bool> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
             Category category = await _catalogContext.Categories.FindAsync(request.Id);
-            // если запрошенной категори не существует, то возращаем false
-            if (category == null) throw new NotFoundException(String.Format("категории с id {0} не найдена!",request.Id));
+            // если запрошенной категори не существует, то выбрасываем исключение
+            if (category == null) throw new BadRequestException();
+            
             try
             {
                 _catalogContext.Categories.Remove(category);
@@ -32,12 +33,11 @@ namespace Application.Features.Catalog.Commands.DeleteCategory
             }
             catch (Exception e)
             {
-
-                return false;
+                throw new Exception("unidentified");
             }
-            
-            return true;   
-            
+            return Unit.Value;
+                      
         }
+
     }
 }

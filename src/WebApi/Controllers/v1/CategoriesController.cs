@@ -44,13 +44,11 @@ namespace WebApi.Controllers.v1
         // Удалить категорию
         [Route("{id}")]
         [HttpDelete]
-        public async Task<ActionResult<Response<string>>> Delete(long id)
+        public async Task<ActionResult> Delete(long id)
         {
             var command = new DeleteCategoryCommand { Id = id };
-            var status = await Mediator.Send(command);
-            if (!status) return new Response<string>();
-            var vm = new Response<bool>(status);
-            return Ok(vm);
+            await Mediator.Send(command);
+            return Ok();
         }
 
     }
