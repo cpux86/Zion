@@ -163,7 +163,8 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Entities.Catalog.Category", "Parent")
                         .WithMany("Categories")
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Parent");
                 });

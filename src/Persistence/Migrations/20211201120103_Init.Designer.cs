@@ -9,7 +9,7 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20211129061454_Init")]
+    [Migration("20211201120103_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -165,7 +165,8 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Entities.Catalog.Category", "Parent")
                         .WithMany("Categories")
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Parent");
                 });

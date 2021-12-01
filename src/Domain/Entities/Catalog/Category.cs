@@ -13,7 +13,7 @@ namespace Domain.Entities.Catalog
     public class Category
     {
         // Максимальная глубина вложенности меню
-        const int _maxDeph = 3;
+        const int _maxDeph = 5;
         private Category()
         {
             // Требуется для EF
@@ -65,7 +65,7 @@ namespace Domain.Entities.Catalog
             // вычисляю значение глубины для  новой категории
             int level = Lavel + 1;
             // проверяю, не достигла новая категория максимальной глубины
-            if (level > _maxDeph) throw new Exception("Ограничение глубины вложения");
+            if (level > _maxDeph) throw new Exception("не допустимая глубина вложения");
             // устанавливаю значение глубины для новой категории
             children.Lavel = level;
 

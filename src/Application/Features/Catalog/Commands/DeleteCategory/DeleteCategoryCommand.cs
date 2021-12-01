@@ -10,5 +10,7 @@ namespace Application.Features.Catalog.Commands.DeleteCategory
     public class DeleteCategoryCommand : IRequest
     {
         public long Id { get; set; }
+        public string Items { get; set; }
+
     }
 }

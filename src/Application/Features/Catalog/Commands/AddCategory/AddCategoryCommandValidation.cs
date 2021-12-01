@@ -7,7 +7,7 @@ namespace Application.Features.Catalog.Commands.AddCategory
         public AddCategoryCommandValidation()
         {
             RuleFor(addCategoryCommand =>
-            addCategoryCommand.Name).NotEmpty().MaximumLength(5);
+            addCategoryCommand.Name).NotEmpty().MaximumLength(20);
         }
     }
 }
