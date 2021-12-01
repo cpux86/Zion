@@ -1,7 +1,7 @@
 ﻿
 using Application.Features.Catalog.Commands.AddCategory;
 using Application.Features.Catalog.Commands.DeleteCategory;
-using Application.Features.Catalog.Queries.GetCategoriesList;
+using Application.Features.Catalog.Queries.GetMenu;
 using Application.Wrappers;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +25,7 @@ namespace WebApi.Controllers.v1
         [HttpGet]
         public async Task<ActionResult<Response<MenuViewModele>>> GetAllMenu()
         {
-            var query = new GetCategoriesListQuery();
+            var query = new GetMenuQuery();
             var menu =  await Mediator.Send(query);
             var vm = new Response<MenuViewModele>(menu);
             return Ok(vm);

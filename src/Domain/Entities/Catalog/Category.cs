@@ -45,7 +45,7 @@ namespace Domain.Entities.Catalog
         public virtual Category Parent { get; private set; }
 
         // дочерние категории
-        public virtual List<Category> Categories { get; private set; }
+        public virtual List<Category> Categories { get; private set; } = new List<Category>();
         // Заказы. Запрос на приобретение товара, содержащий описание товара
         public virtual List<Order> Orders { get; private set; }
         // товары которые уже имеются в категории

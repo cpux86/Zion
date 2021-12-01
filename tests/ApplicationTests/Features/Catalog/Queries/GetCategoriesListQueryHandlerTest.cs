@@ -1,4 +1,4 @@
-﻿using Application.Features.Catalog.Queries.GetCategoriesList;
+﻿using Application.Features.Catalog.Queries.GetMenu;
 using ApplicationTests.Common;
 using AutoMapper;
 using Domain.Entities.Catalog;
@@ -18,8 +18,8 @@ namespace ApplicationTests.Features.Catalog.Queries
         [Fact]
         public async Task GetMenu_Menu()
         {
-            var handler = new GetCategoriesListQueryHandler(Context, _mapper);
-            MenuViewModele menu = await handler.Handle(new GetCategoriesListQuery(), CancellationToken.None);
+            var handler = new GetMenuQueryHandler(Context, _mapper);
+            MenuViewModele menu = await handler.Handle(new GetMenuQuery(), CancellationToken.None);
             //
             //Assert.True(menu.Menu.Count() > 0);
         }

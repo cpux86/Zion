@@ -1,5 +1,5 @@
 ﻿
-using Application.Features.Catalog.Queries.GetCategoriesList;
+using Application.Features.Catalog.Queries.GetMenu;
 using AutoMapper;
 using Domain.Entities.Catalog;
 using Domain.Entities.ProductAggregate;

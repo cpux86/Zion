@@ -5,6 +5,7 @@ using Domain.Entities.OrderAggregate;
 using Domain.Entities.ProductAggregate;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
+using Persistence.Config;
 using System;
 
 
@@ -32,20 +33,7 @@ namespace Persistence.Context
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Category>().HasData(
-                new Category("Root")
-                {
-                    // Первоначальне значение первичного ключа не может быть null
-                    Id =  1
-                }
-                );
-
-
-            builder.Entity<Category>()
-                .HasOne(c => c.Parent)
-                .WithMany(c => c.Categories)
-                .OnDelete(DeleteBehavior.Cascade);
-
+            builder.ApplyConfiguration(new CategoryConfiguration());
         }
     }
 }

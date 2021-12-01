@@ -23,23 +23,18 @@ namespace Application.Features.Catalog.Commands.DeleteCategory
 
         public async Task<Unit> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
+            // получаю категорию для удаления
             Category category = await _catalogContext.Categories
                 .Where(c => c.Id == request.Id)
-                .Include(ch => ch.Categories)
                 .FirstOrDefaultAsync();
-            if (category == null) throw new NotFoundException("не найдена");
-
-            bool isEmpty = category.Categories.Any();
-            if (request.Items != "all" && isEmpty) throw new Exception("Категория не пуста");
-            //category.Categories.Count
-            //await _catalogContext.Categories.ToListAsync();
-            //Category category = await _catalogContext.Categories
-            //    .Where(c => c.Id == request.Id)
-            //    .Include(ch => ch.Categories)
-            //    .FirstOrDefaultAsync();
-            //var list = category.Categories.ToArray();
             // если запрошенной категори не существует, то выбрасываем исключение
-            
+            if (category == null) throw new NotFoundException("категория не найдена");
+            // проверяю категорию на пустоту
+            bool isNotEmpty = _catalogContext.Categories.Where(ch => ch.Parent.Id == request.Id).Any();
+            // если удаляемая категория содержит вложенные категории (не пуста).
+            // если request.Items = all, то согласно запросу разрешаем удалять категории с ее содержимым
+            if (request.Items != "all" && isNotEmpty) throw new Exception("Категория не пуста");
+
             
             try
             {
