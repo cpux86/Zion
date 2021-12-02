@@ -10,7 +10,7 @@ namespace WebApi.Modeles
         /// <summary>
         /// Назначение. Родительская категория
         /// </summary>
-        public long ParentId { get; set; }
+        //public long ParentId { get; set; }
         //public void Mapping(Profile profile)
         //{
         //    profile.CreateMap<CreateCategoryDto, AddCategoryCommand>();

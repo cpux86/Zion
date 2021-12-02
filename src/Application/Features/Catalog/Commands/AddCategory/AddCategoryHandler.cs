@@ -24,7 +24,7 @@ namespace Application.Features.Catalog.Commands.AddCategory
         public async Task<long> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
         {
             // создаем новую катергорию
-            var subCategory = new Category(request.Name);
+            Category subCategory = new Category(request.Name);
 
             // получаем категорию в которую необходимо встваить подкатегорию
             Category parent = _catalogContext.Categories
@@ -35,14 +35,6 @@ namespace Application.Features.Catalog.Commands.AddCategory
             if (parent == null) return subCategory.Id;
 
             parent.Add(subCategory);
-            //try
-            //{
-                
-            //}
-            //catch (Exception e)
-            //{
-            //    return subCategory.Id;
-            //}
 
 
             await _catalogContext.SaveChangesAsync(cancellationToken);

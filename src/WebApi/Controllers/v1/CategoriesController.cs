@@ -23,19 +23,19 @@ namespace WebApi.Controllers.v1
         //[Route("{id}/[action]")]
         // Получить все категории каталога
         [HttpGet]
-        public async Task<ActionResult<Response<MenuViewModele>>> GetAllMenu()
+        public async Task<ActionResult<Response<MenuVm>>> GetAllMenu()
         {
             var query = new GetMenuQuery();
             var menu =  await Mediator.Send(query);
-            var vm = new Response<MenuViewModele>(menu);
+            var vm = new Response<MenuVm>(menu);
             return Ok(vm);
         }
         // Вставить новую категорию
-        //[Route("{id}")]
+        [Route("{id?}")]
         [HttpPost]
-        public async Task<ActionResult<Response<string>>> Create([FromHeader] CreateCategoryDto dto)
+        public async Task<ActionResult<Response<string>>> Create([FromHeader] CreateCategoryDto dto, long id)
         {
-            var command = new AddCategoryCommand { Name = dto.Name, ParentId = dto.ParentId };
+            var command = new AddCategoryCommand { Name = dto.Name, ParentId = id };
             var status = await Mediator.Send(command);
             if (status == 0) return new Response<string>();
             var vm = new Response<long>(status);

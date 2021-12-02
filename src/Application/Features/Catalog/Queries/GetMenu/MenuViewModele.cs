@@ -14,4 +14,8 @@ namespace Application.Features.Catalog.Queries.GetMenu
         public string Url { get; set; }
         public IEnumerable<MenuViewModele> Categories { get; set; }
     }
+    public class MenuVm
+    {
+        public IEnumerable<MenuViewModele> Categories { get; set; }
+    }
 }

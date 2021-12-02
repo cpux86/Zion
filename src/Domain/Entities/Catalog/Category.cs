@@ -14,7 +14,7 @@ namespace Domain.Entities.Catalog
     {
         // Максимальная глубина вложенности меню
         const int _maxDeph = 5;
-        private Category()
+        public Category()
         {
             // Требуется для EF
         }
