@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Catalog.Queries.GetMenu
 {
-    public class GetMenuQuery : IRequest<MenuVm>
+    public class GetMenuQuery : IRequest<List<MenuViewModele>>
     {
     }
 }

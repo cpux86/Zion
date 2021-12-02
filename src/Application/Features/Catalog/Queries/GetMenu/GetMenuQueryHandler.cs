@@ -13,7 +13,7 @@ using AutoMapper;
 
 namespace Application.Features.Catalog.Queries.GetMenu
 {
-    public class GetMenuQueryHandler : IRequestHandler<GetMenuQuery, MenuVm>
+    public class GetMenuQueryHandler : IRequestHandler<GetMenuQuery, List<MenuViewModele>>
     {
         private readonly ICatalogContext _catalogContext;
         private readonly IMapper _mapper;
@@ -24,14 +24,20 @@ namespace Application.Features.Catalog.Queries.GetMenu
             _mapper = mapper;
         }
 
-        public async Task<MenuVm> Handle(GetMenuQuery request, CancellationToken cancellationToken)
+        public async Task<List<MenuViewModele>> Handle(GetMenuQuery request, CancellationToken cancellationToken)
         {
             // подгружаю все категории в контекст
             var allMunuList = await _catalogContext.Categories
                 .ToListAsync(cancellationToken);
-            var menuViewModele = _mapper.Map<MenuViewModele>(allMunuList.FirstOrDefault());
-            var menuVm = _mapper.Map<MenuVm>(menuViewModele);
-            return menuVm;
+            var root = _catalogContext.Categories.Where(c => c.Lavel == 0).ToArray();
+            List<MenuViewModele> menuViewModele = new List<MenuViewModele>();
+            foreach (var item in root)
+            {
+                menuViewModele.Add(_mapper.Map<MenuViewModele>(item));
+            }
+            
+            //var menuVm = _mapper.Map<MenuVm>(menuViewModele.FirstOrDefault());
+            return menuViewModele;
         }
     }
 }

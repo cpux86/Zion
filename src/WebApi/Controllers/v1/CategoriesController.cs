@@ -5,6 +5,7 @@ using Application.Features.Catalog.Queries.GetMenu;
 using Application.Wrappers;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApi.Modeles;
 
@@ -27,13 +28,13 @@ namespace WebApi.Controllers.v1
         {
             var query = new GetMenuQuery();
             var menu =  await Mediator.Send(query);
-            var vm = new Response<MenuVm>(menu);
+            var vm = new Response<List<MenuViewModele>>(menu);
             return Ok(vm);
         }
         // Вставить новую категорию
         [Route("{id?}")]
         [HttpPost]
-        public async Task<ActionResult<Response<string>>> Create([FromHeader] CreateCategoryDto dto, long id)
+        public async Task<ActionResult<Response<string>>> Create([FromHeader] CreateCategoryDto dto, long id = 1)
         {
             var command = new AddCategoryCommand { Name = dto.Name, ParentId = id };
             var status = await Mediator.Send(command);
