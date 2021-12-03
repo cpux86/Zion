@@ -25,6 +25,17 @@ namespace Application.Features.Catalog.Commands.AddCategory
         {
             // создаем новую катергорию
             Category subCategory = new Category(request.Name);
+            if (request.ParentId == 0)
+            {
+                var isset = _catalogContext.Categories
+                    .Where(p => p.Parent == null && p.Name == request.Name)
+                    .FirstOrDefault();
+                
+                _catalogContext.Categories.Add(subCategory);
+
+                await _catalogContext.SaveChangesAsync(cancellationToken);
+                return subCategory.Id;
+            }
 
             // получаем категорию в которую необходимо встваить подкатегорию
             Category parent = _catalogContext.Categories

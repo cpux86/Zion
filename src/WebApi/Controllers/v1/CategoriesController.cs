@@ -34,7 +34,7 @@ namespace WebApi.Controllers.v1
         // Вставить новую категорию
         [Route("{id?}")]
         [HttpPost]
-        public async Task<ActionResult<Response<string>>> Create([FromHeader] CreateCategoryDto dto, long id = 1)
+        public async Task<ActionResult<Response<string>>> Create([FromHeader] CreateCategoryDto dto, long id)
         {
             var command = new AddCategoryCommand { Name = dto.Name, ParentId = id };
             var status = await Mediator.Send(command);

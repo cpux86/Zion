@@ -5,9 +5,11 @@ using Domain.Entities.OrderAggregate;
 using Domain.Entities.ProductAggregate;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Persistence.Config;
 using System;
-
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Persistence.Context
 {
@@ -34,6 +36,10 @@ namespace Persistence.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new CategoryConfiguration());
+        }
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }
