@@ -20,5 +20,6 @@ namespace Application.Interfaces
         DbSet<Order> Orders { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        
     }
 }

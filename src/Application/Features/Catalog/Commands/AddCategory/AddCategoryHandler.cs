@@ -29,9 +29,11 @@ namespace Application.Features.Catalog.Commands.AddCategory
             {
                 var isset = _catalogContext.Categories
                     .Where(p => p.Parent == null && p.Name == request.Name)
-                    .FirstOrDefault();
-                
+                    .Any();
+
+                if(isset) throw new Exception("Конфликт имен");
                 _catalogContext.Categories.Add(subCategory);
+                
 
                 await _catalogContext.SaveChangesAsync(cancellationToken);
                 return subCategory.Id;
@@ -47,7 +49,7 @@ namespace Application.Features.Catalog.Commands.AddCategory
 
             parent.Add(subCategory);
 
-
+            
             await _catalogContext.SaveChangesAsync(cancellationToken);
             return subCategory.Id;
         }

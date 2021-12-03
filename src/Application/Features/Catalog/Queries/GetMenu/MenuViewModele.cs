@@ -9,6 +9,7 @@ namespace Application.Features.Catalog.Queries.GetMenu
 {
     public class MenuViewModele
     {
+        public long Id { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public string Url { get; set; }

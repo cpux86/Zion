@@ -1,6 +1,7 @@
 ﻿
 using Application.Features.Catalog.Commands.AddCategory;
 using Application.Features.Catalog.Commands.DeleteCategory;
+using Application.Features.Catalog.Commands.UpdateCategory;
 using Application.Features.Catalog.Queries.GetMenu;
 using Application.Wrappers;
 using AutoMapper;
@@ -34,7 +35,7 @@ namespace WebApi.Controllers.v1
         // Вставить новую категорию
         [Route("{id?}")]
         [HttpPost]
-        public async Task<ActionResult<Response<string>>> Create([FromHeader] CreateCategoryDto dto, long id)
+        public async Task<ActionResult<Response<string>>> Create([FromForm] CreateCategoryDto dto, long id)
         {
             var command = new AddCategoryCommand { Name = dto.Name, ParentId = id };
             var status = await Mediator.Send(command);
@@ -52,6 +53,17 @@ namespace WebApi.Controllers.v1
             var vm = new Response<string>(null,"succeeded");
             return Ok(vm);
         }
+        // Обновить категорию
+        [Route("{id}")]
+        [HttpPut]
+        public async Task<ActionResult> Update([FromForm]UpdateCategoryCommand command, long id)
+        {
+            command.Id = id;
+            await Mediator.Send(command);
+            var vm = new Response<string>(null, "succeeded");
+            return Ok(vm);
+        }
+
 
     }
 }
