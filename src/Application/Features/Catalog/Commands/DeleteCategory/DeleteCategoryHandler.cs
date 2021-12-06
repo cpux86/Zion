@@ -33,7 +33,7 @@ namespace Application.Features.Catalog.Commands.DeleteCategory
             bool isNotEmpty = _catalogContext.Categories.Where(ch => ch.Parent.Id == request.Id).Any();
             // если удаляемая категория содержит вложенные категории (не пуста).
             // если request.Items = all, то согласно запросу разрешаем удалять категории с ее содержимым
-            if (request.Items != "all" && isNotEmpty) throw new Exception("Категория не пуста");
+            if (!request.Force && isNotEmpty) throw new Exception("Категория не пуста");
 
             
             try

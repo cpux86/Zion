@@ -2,6 +2,7 @@
 using Application.Features.Catalog.Commands.AddCategory;
 using Application.Features.Catalog.Commands.DeleteCategory;
 using Application.Features.Catalog.Commands.UpdateCategory;
+using Application.Features.Catalog.Queries.GetCategory;
 using Application.Features.Catalog.Queries.GetMenu;
 using Application.Wrappers;
 using AutoMapper;
@@ -32,6 +33,18 @@ namespace WebApi.Controllers.v1
             var vm = new Response<List<MenuViewModele>>(menu);
             return Ok(vm);
         }
+
+        // Получить категорию по id
+        [Route("{id}")]
+        [HttpGet]
+        public async Task<CategoryViewModele> GetCategoryById(long id)
+        {
+            var query = new GetCategoryByIdQuery { Id = id };
+            var result = await Mediator.Send(query);
+            return result;
+        }
+
+
         // Вставить новую категорию
         [Route("{id?}")]
         [HttpPost]

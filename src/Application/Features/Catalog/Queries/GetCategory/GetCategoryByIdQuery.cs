@@ -5,12 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Catalog.Commands.DeleteCategory
+namespace Application.Features.Catalog.Queries.GetCategory
 {
-    public class DeleteCategoryCommand : IRequest
+    public class GetCategoryByIdQuery : IRequest<CategoryViewModele>
     {
         public long Id { get; set; }
-        public bool Force { get; set; }
-
     }
 }
