@@ -35,8 +35,8 @@ namespace WebApi.Controllers.v1
         }
 
         // Получить категорию по id
-        [Route("{id}")]
-        [HttpGet]
+        //[Route("{id}")]
+        [HttpGet("{id}", Name = "GetCategoryById")]
         public async Task<CategoryViewModele> GetCategoryById(long id)
         {
             var query = new GetCategoryByIdQuery { Id = id };
@@ -54,7 +54,8 @@ namespace WebApi.Controllers.v1
             var status = await Mediator.Send(command);
             if (status == 0) return new Response<string>();
             var vm = new Response<long>(status);
-            return Ok(vm);
+            return CreatedAtRoute("GetCategoryById", new { id = status }, vm);
+            //return Ok(vm);
         }
         // Удалить категорию
         [Route("{id}")]
