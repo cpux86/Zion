@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Interfaces", "src\Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTests", "tests\ApplicationTests\ApplicationTests.csproj", "{9003A6E1-0388-492D-9237-1C3E9D12FD3C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageServiceApi", "src\ImageServices\ImageServiceApi\ImageServiceApi.csproj", "{C6C15664-0BBF-40EE-AC77-F341A0234AC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{9003A6E1-0388-492D-9237-1C3E9D12FD3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9003A6E1-0388-492D-9237-1C3E9D12FD3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9003A6E1-0388-492D-9237-1C3E9D12FD3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6C15664-0BBF-40EE-AC77-F341A0234AC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6C15664-0BBF-40EE-AC77-F341A0234AC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6C15664-0BBF-40EE-AC77-F341A0234AC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6C15664-0BBF-40EE-AC77-F341A0234AC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

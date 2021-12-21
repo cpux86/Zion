@@ -9,6 +9,7 @@ using Persistence;
 using Newtonsoft.Json;
 using WebApi.Middleware;
 using FluentValidation;
+using Microsoft.OpenApi.Models;
 
 namespace WebApi
 {
@@ -17,6 +18,7 @@ namespace WebApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            var t = Configuration["test"];
         }
 
         public IConfiguration Configuration { get; }
@@ -36,6 +38,11 @@ namespace WebApi
                 config.ReportApiVersions = true;
             });
             services.AddHttpContextAccessor();
+
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +51,8 @@ namespace WebApi
             if (env.IsDevelopment())
             {              
                 app.UseDeveloperExceptionPage();
+                //app.UseSwagger();
+                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi v1"));
             }
             app.UseCustomExceptionHandler();
 

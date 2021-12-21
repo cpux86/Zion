@@ -13,7 +13,7 @@
       "commandName": "IISExpress",
       "launchUrl": "weatherforecast",
       "environmentVariables": {
-        "test": "fdfd",
+        "test": "Тестовая сторока",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
@@ -32,6 +32,16 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/weatherforecast",
       "publishAllPorts": true,
       "useSSL": true
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:5001/weatherforecast",
+      "environmentVariables": {
+        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "distributionName": ""
     }
   }
 }
