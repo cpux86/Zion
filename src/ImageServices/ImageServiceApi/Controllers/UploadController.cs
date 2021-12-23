@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ImageService.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Net.Http.Headers;
@@ -13,11 +14,18 @@ using System.Threading.Tasks;
 //using SixLabors.ImageSharp.Formats.Jpeg;
 //using Shorthand.ImageSharp.WebP;
 
-namespace ImageServiceApi.Controllers.v1
+namespace ImageService.Controllers.v1
 {
     [ApiVersion("1.0")]
     public class UploadController : ControllerBase
     {
+        private readonly IImageService _imageService;
+
+        public UploadController(IImageService imageService)
+        {
+            _imageService = imageService;
+        }
+
         [HttpPost]
         public async Task<IActionResult> UploadImageFile([FromForm] IFormFileCollection uploadedFile)
         {
