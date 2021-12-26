@@ -9,22 +9,25 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-//using SixLabors.ImageSharp;
-//using SixLabors.ImageSharp.Processing;
-//using SixLabors.ImageSharp.Formats.Jpeg;
-//using Shorthand.ImageSharp.WebP;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using Shorthand.ImageSharp.WebP;
+using SixLabors.ImageSharp.Metadata;
+using SixLabors.ImageSharp.Metadata.Profiles.Exif;
 
 namespace ImageService.Controllers.v1
 {
     [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]/")]
     public class UploadController : ControllerBase
     {
-        private readonly IImageService _imageService;
+        //private readonly IImageService _imageService;
 
-        public UploadController(IImageService imageService)
-        {
-            _imageService = imageService;
-        }
+        //public UploadController(IImageService imageService)
+        //{
+        //    _imageService = imageService;
+        //}
 
         [HttpPost]
         public async Task<IActionResult> UploadImageFile([FromForm] IFormFileCollection uploadedFile)
@@ -53,32 +56,32 @@ namespace ImageService.Controllers.v1
                     
                 }
 
-                //using (Image image = Image.Load(saveToPath))
-                //{
-                //    // Resize the given image in place and return it for chaining.
-                //    // 'x' signifies the current image processing context.
+                using (Image image = Image.Load(saveToPath))
+                {
+                    // Resize the given image in place and return it for chaining.
+                    // 'x' signifies the current image processing context.
 
-                //    var size = image.Size();
-                //    var l = size.Width / 4;
-                //    var t = size.Height / 4;
-                //    var r = 3 * (size.Width / 4);
-                //    var b = 3 * (size.Height / 4);
+                    var size = image.Size();
+                    var l = size.Width / 4;
+                    var t = size.Height / 4;
+                    var r = 3 * (size.Width / 4);
+                    var b = 3 * (size.Height / 4);
 
-                //    //image.Mutate(x => x.Resize(image.Width / 4, image.Height / 4));
-                //    //image.Mutate(x => x.Resize(new Size { Width = 150, Height = 150}));
-                //    image.Mutate(x => x.Resize(new Size { Width = 1280}));
-                //    //image.Mutate(x => x.Crop(400, 300));
-
+                    //image.Mutate(x => x.Resize(image.Width / 4, image.Height / 4));
+                    //image.Mutate(x => x.Resize(new Size { Width = 150, Height = 150}));
+                    image.Mutate(x => x.Resize(new Size { Width = 1280 }));
+                    //image.Mutate(x => x.Crop(400, 300));
+                    // Затираю метаданные файла 
+                    image.Metadata.ExifProfile = new ExifProfile();
                     
 
-                //    await image.SaveAsync(@"C:\C#\Zion\1.webp", new WebPEncoder { Quality = 70 });
-                //    //image.SaveAsJpeg(@"C:\C#\Zion\1.jpg");
+                    await image.SaveAsync(@"C:\C#\Zion\1.webp", new WebPEncoder { Quality = 70 });
+                    //image.SaveAsJpeg(@"C:\C#\Zion\1.jpg");
 
 
-                //    //image.Save(@"C:\C#\Zion\1.jpg");
+                    image.Save(@"C:\C#\Zion\1.jpg");
 
-
-                //}
+                }
             }
 
             

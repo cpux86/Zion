@@ -58,12 +58,12 @@ namespace WebApi.Controllers.v1
 
                     //image.Mutate(x => x.Resize(image.Width / 4, image.Height / 4));
                     //image.Mutate(x => x.Resize(new Size { Width = 150, Height = 150}));
-                    image.Mutate(x => x.Resize(new Size { Width = 1280}));
+                    //image.Mutate(x => x.Resize(new Size { Width = 1280}));
                     //image.Mutate(x => x.Crop(400, 300));
 
                     
 
-                    await image.SaveAsync(@"C:\C#\Zion\1.webp", new WebPEncoder { Quality = 70 });
+                    await image.SaveAsync(@"C:\C#\Zion\1.webp", new WebPEncoder { Quality = 80 });
                     //image.SaveAsJpeg(@"C:\C#\Zion\1.jpg");
 
 
