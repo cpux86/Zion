@@ -1,6 +1,6 @@
 using System;
 
-namespace ImageService
+namespace ImageProcessingService
 {
     public class WeatherForecast
     {

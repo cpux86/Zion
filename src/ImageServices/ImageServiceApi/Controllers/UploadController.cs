@@ -1,4 +1,4 @@
-﻿using ImageService.Interfaces;
+﻿using ImageProcessingService.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
@@ -16,21 +16,23 @@ using Shorthand.ImageSharp.WebP;
 using SixLabors.ImageSharp.Metadata;
 using SixLabors.ImageSharp.Metadata.Profiles.Exif;
 
-namespace ImageService.Controllers.v1
+namespace ImageProcessingService.Controllers.v1
 {
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]/")]
     public class UploadController : ControllerBase
     {
-        //private readonly IImageService _imageService;
+        private readonly IImageService _imageService;
+        private readonly IImageProfile _profile;
 
-        //public UploadController(IImageService imageService)
-        //{
-        //    _imageService = imageService;
-        //}
+        public UploadController(IImageService imageService, IImageProfile profile)
+        {
+            _imageService = imageService;
+            _profile = profile;
+        }
 
         [HttpPost]
-        public async Task<IActionResult> UploadImageFile([FromForm] IFormFileCollection uploadedFile)
+        public async Task<IActionResult> UploadImageFile(IFormFile uploadedFile)
         {
             var f = uploadedFile;
             var request =  HttpContext.Request;
@@ -41,50 +43,46 @@ namespace ImageService.Controllers.v1
             //var reader = new MultipartReader(mediaTypeHeader.Boundary.Value, request.Body);
             //var section = await reader.ReadNextSectionAsync();
 
-            
+            //var fileName = Path.GetRandomFileName();
+            //var saveToPath = Path.Combine(Path.GetTempPath(), fileName);
+            var saveToPath = Path.Combine(@"C:\C#\Zion", uploadedFile.FileName);
 
-            foreach (var item in uploadedFile)
+            using (var targetStream = System.IO.File.Create(saveToPath))
             {
-                //var fileName = Path.GetRandomFileName();
-                //var saveToPath = Path.Combine(Path.GetTempPath(), fileName);
-                var saveToPath = Path.Combine(@"C:\C#\Zion", item.FileName);
                 
-                using (var targetStream = System.IO.File.Create(saveToPath))
-                {
-                    //await section.Body.CopyToAsync(targetStream);
-                    await item.CopyToAsync(targetStream);
-                    
-                }
+                //await section.Body.CopyToAsync(targetStream);
+                await uploadedFile.CopyToAsync(targetStream);
 
-                using (Image image = Image.Load(saveToPath))
-                {
-                    // Resize the given image in place and return it for chaining.
-                    // 'x' signifies the current image processing context.
-
-                    var size = image.Size();
-                    var l = size.Width / 4;
-                    var t = size.Height / 4;
-                    var r = 3 * (size.Width / 4);
-                    var b = 3 * (size.Height / 4);
-
-                    //image.Mutate(x => x.Resize(image.Width / 4, image.Height / 4));
-                    //image.Mutate(x => x.Resize(new Size { Width = 150, Height = 150}));
-                    image.Mutate(x => x.Resize(new Size { Width = 1280 }));
-                    //image.Mutate(x => x.Crop(400, 300));
-                    // Затираю метаданные файла 
-                    image.Metadata.ExifProfile = new ExifProfile();
-                    
-
-                    await image.SaveAsync(@"C:\C#\Zion\1.webp", new WebPEncoder { Quality = 70 });
-                    //image.SaveAsJpeg(@"C:\C#\Zion\1.jpg");
-
-
-                    image.Save(@"C:\C#\Zion\1.jpg");
-
-                }
             }
 
-            
+            using (Image image = Image.Load(saveToPath))
+            {
+                // Resize the given image in place and return it for chaining.
+                // 'x' signifies the current image processing context.
+
+                var size = image.Size();
+                var l = size.Width / 4;
+                var t = size.Height / 4;
+                var r = 3 * (size.Width / 4);
+                var b = 3 * (size.Height / 4);
+
+                //image.Mutate(x => x.Resize(image.Width / 4, image.Height / 4));
+                //image.Mutate(x => x.Resize(new Size { Width = 150, Height = 150}));
+                image.Mutate(x => x.Resize(new Size { Width = 1280 }));
+                //image.Mutate(x => x.Crop(400, 300));
+                // Затираю метаданные файла 
+                image.Metadata.ExifProfile = new ExifProfile();
+
+
+                await image.SaveAsync(@"C:\C#\Zion\1.webp", new WebPEncoder { Quality = 70 });
+                //image.SaveAsJpeg(@"C:\C#\Zion\1.jpg");
+
+
+                image.Save(@"C:\C#\Zion\1.jpg");
+
+            }
+
+
 
             return Ok();
         }

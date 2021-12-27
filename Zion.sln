@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Interfaces", "src\Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTests", "tests\ApplicationTests\ApplicationTests.csproj", "{9003A6E1-0388-492D-9237-1C3E9D12FD3C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageService", "src\ImageServices\ImageServiceApi\ImageService.csproj", "{C6C15664-0BBF-40EE-AC77-F341A0234AC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessingService", "src\ImageServices\ImageServiceApi\ImageProcessingService.csproj", "{C6C15664-0BBF-40EE-AC77-F341A0234AC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

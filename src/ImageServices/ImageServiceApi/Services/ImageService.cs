@@ -1,13 +1,14 @@
-﻿using ImageService.Interfaces;
+﻿using ImageProcessingService.Interfaces;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
-namespace ImageService.Services
+namespace ImageProcessingService.Services
 {
     public class ImageService : IImageService
     {
-        public async Task<string> SaveImageAsync(IFormFile file)
+        public Task<string> SaveImageAsync(IFormFile file, IImageProfile profile)
         {
+            
             throw new System.NotImplementedException();
         }
     }
