@@ -29,8 +29,9 @@ namespace WebApi.Controllers.v1
             }
             //var reader = new MultipartReader(mediaTypeHeader.Boundary.Value, request.Body);
             //var section = await reader.ReadNextSectionAsync();
-
             
+
+
 
             foreach (var item in uploadedFile)
             {

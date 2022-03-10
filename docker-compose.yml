@@ -1,0 +1,59 @@
+version: '3.4'
+
+volumes:
+  SSL:
+
+services:
+  proxy:
+    image: nginx:latest
+    container_name: nginx-proxy
+    restart: always
+    environment:
+      IMAGE_SERVER: proxy
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./data/images:/data/images
+      - ./data/cache:/data/cache
+      - ./data/temp:/data/temp
+      - ./data/log/nginx:/data/log/nginx
+      - SSL:/etc/nginx/ssl
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - db
+      - imageprocessingservice
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+  db:
+    image: postgres
+    container_name: postges_db
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 1AC290066F
+      POSTGRES_USER: cpux86
+      POSTGRES_DB: zion
+    ports:
+      - 5432:5432
+    volumes:
+      - C:\C#\data\:/var/lib/postgresql/data
+
+  imageprocessingservice:
+    image: ${DOCKER_REGISTRY-}imageprocessingservice
+    container_name: image_service
+    restart: always
+    ports:
+      - 1986:80
+      - 1987:443
+    volumes:
+      - ./data/img:/app/wwwroot/img
+    build:
+      context: .
+      dockerfile: src/Services/ImageServiceApi/Dockerfile
+    depends_on:
+      - db

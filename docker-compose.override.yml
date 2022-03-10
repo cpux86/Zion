@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  imageprocessingservice:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ConnectionString=Host=db;Port=5432;Database=test_db;Username=cpux86;Password=1AC290066F
+    ports:
+      - "443"
+      - "80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
