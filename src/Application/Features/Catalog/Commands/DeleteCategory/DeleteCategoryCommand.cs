@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Catalog.Commands.DeleteCategory
+namespace Serivce.Features.Catalog.Commands.DeleteCategory
 {
     public class DeleteCategoryCommand : IRequest
     {

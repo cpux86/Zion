@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Catalog.Commands.AddCategory
+namespace Serivce.Features.Catalog.Commands.AddCategory
 {
     public class AddCategoryCommand : IRequest<long>
     {

@@ -1,11 +1,11 @@
-﻿using Application.Common.Behaviors;
-using Application.Features.Catalog.Commands.AddCategory;
+﻿using Serivce.Common.Behaviors;
+using Serivce.Features.Catalog.Commands.AddCategory;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace Application
+namespace Serivce
 {
     public static class ServiceExtensions
     {

@@ -1,6 +1,6 @@
 ﻿
 
-namespace Application.Wrappers
+namespace Serivce.Wrappers
 {
     public class Response<T>
     {

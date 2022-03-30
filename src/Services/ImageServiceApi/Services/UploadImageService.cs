@@ -40,28 +40,7 @@ namespace ImageProcessingService.Services
         /// <exception cref="Exception"></exception>
         public async Task<string> SaveImageAsync(Image image, IImageProfile imageProfile)
         {
-            //Stream stream = file.OpenReadStream();
-
-
-            //try
-            //{
-            //    string imgExt = Image.DetectFormat(stream).Name;
-            //    bool isAllowedType = _profile.AllowedExtensions.Any(ext => ext.ToLower() == imgExt.ToLower());
-            //    if (!isAllowedType) throw new BadRequestException("не допустимый тип!");
-            //}
-            //catch (Exception e)
-            //{
-
-            //    throw new BadRequestException("не верный запрос!");
-            //}
-
-            //Image image = await Image.LoadAsync(stream);
-            //Validation.ValidateUploadFileSize(file.Length, _profile);
-
-            ///////////////////////
-            //Validation.ValidateImageSize(image, imageProfile);
            
-
             Configuration.Default.ImageFormatsManager.SetDecoder(JpegFormat.Instance, new JpegDecoder() { IgnoreMetadata = true });
             Configuration.Default.ImageFormatsManager.SetDecoder(GifFormat.Instance, new GifDecoder() { IgnoreMetadata = true });
             Configuration.Default.ImageFormatsManager.SetDecoder(PngFormat.Instance, new PngDecoder() { IgnoreMetadata = true });
@@ -87,8 +66,6 @@ namespace ImageProcessingService.Services
             if (File.Exists(filePath)) throw new Exception("ошибка сервера");
 
 
-
-            
             await image.SaveAsync(filePath, new JpegEncoder { Quality = imageProfile.Quality});
 
             return $"{path}/{fileName}";
@@ -100,7 +77,7 @@ namespace ImageProcessingService.Services
             var resizeOptions = new ResizeOptions
             {
                 Mode = ResizeMode.Max,
-                Size = new Size(profile.Width)
+                Size = new Size(profile.OriginalImageSize.Width)
             };
             image.Mutate(action => action.Resize(resizeOptions));
         }
@@ -114,12 +91,12 @@ namespace ImageProcessingService.Services
 
         private Rectangle GetCropRectangle(IImageInfo image, IImageProfile imageProfile)
         {
-            var widthDifference = image.Width - imageProfile.Width;
-            var heightDifference = image.Height - imageProfile.Height;
+            var widthDifference = image.Width - imageProfile.OriginalImageSize.Width;
+            var heightDifference = image.Height - imageProfile.OriginalImageSize.Height;
             var x = widthDifference / 2;
             var y = heightDifference / 2;
 
-            return new Rectangle(x, y, imageProfile.Width, imageProfile.Height);
+            return new Rectangle(x, y, imageProfile.OriginalImageSize.Width, imageProfile.OriginalImageSize.Height);
         }
 
         private void ValidateExtension()

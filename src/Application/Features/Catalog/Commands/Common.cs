@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Catalog.Commands
+namespace Serivce.Features.Catalog.Commands
 {
     internal class Common
     {

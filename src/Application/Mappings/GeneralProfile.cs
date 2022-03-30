@@ -1,11 +1,11 @@
 ﻿
-using Application.Features.Catalog.Queries.GetCategory;
-using Application.Features.Catalog.Queries.GetMenu;
+using Serivce.Features.Catalog.Queries.GetCategory;
+using Serivce.Features.Catalog.Queries.GetMenu;
 using AutoMapper;
 using Domain.Entities.Catalog;
 using Domain.Entities.ProductAggregate;
 
-namespace Application.Mappings
+namespace Serivce.Mappings
 {
     public class GeneralProfile : Profile
     {

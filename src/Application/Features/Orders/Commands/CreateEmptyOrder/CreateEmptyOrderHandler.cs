@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+﻿using Serivce.Interfaces;
 using Domain.Entities.OrderAggregate;
 using MediatR;
 using System;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Features.Orders.Commands.CreateEmptyOrder
+namespace Serivce.Features.Orders.Commands.CreateEmptyOrder
 {
     public class CreateEmptyOrderHandler : IRequestHandler<CreateEmptyOrderCommand, Guid>
     {

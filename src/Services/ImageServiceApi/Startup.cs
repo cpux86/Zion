@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ImageProcessingService.Services;
 
 namespace ImageProcessingService
 {
@@ -39,6 +40,7 @@ namespace ImageProcessingService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ImageServiceApi", Version = "v1" });
             });
+            services.Configure<ImageProfile>(Configuration.GetSection(ImageProfile.SectionName));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

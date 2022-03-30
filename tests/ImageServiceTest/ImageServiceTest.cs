@@ -22,7 +22,9 @@ namespace ImageServiceTest
         [Fact]
         public async void  SaveImageAsync_ImageId()
         {
-            await _imageService.SaveImageAsync(ImageMoq.GetImageMoq());          
+            IImageProfile imageProfile = new Service.ImageProfile();
+            Image image = Image.Load(@"C:\C#\Zion\tests\ImageServiceTest\img\test.jpg");
+            var res = await _imageService.SaveImageAsync(image,imageProfile);          
         }
     }
 }

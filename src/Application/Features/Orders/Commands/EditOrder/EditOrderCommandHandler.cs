@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+﻿using Serivce.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading;
 using Domain.Entities.OrderAggregate;
 using AutoMapper;
 
-namespace Application.Features.Orders.Commands.EditOrder
+namespace Serivce.Features.Orders.Commands.EditOrder
 {
     public class EditOrderCommandHandler : IRequestHandler<EditOrderCommand, bool>
     {

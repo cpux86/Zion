@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Common.Exceptions
+namespace Serivce.Common.Exceptions
 {
     public class BadRequestException : Exception
     {

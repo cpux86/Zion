@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Catalog.Queries.GetCategory
+namespace Serivce.Features.Catalog.Queries.GetCategory
 {
     public class CategoryViewModele
     {

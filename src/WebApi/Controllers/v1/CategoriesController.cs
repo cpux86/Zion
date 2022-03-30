@@ -1,10 +1,10 @@
 ﻿
-using Application.Features.Catalog.Commands.AddCategory;
-using Application.Features.Catalog.Commands.DeleteCategory;
-using Application.Features.Catalog.Commands.UpdateCategory;
-using Application.Features.Catalog.Queries.GetCategory;
-using Application.Features.Catalog.Queries.GetMenu;
-using Application.Wrappers;
+using Serivce.Features.Catalog.Commands.AddCategory;
+using Serivce.Features.Catalog.Commands.DeleteCategory;
+using Serivce.Features.Catalog.Commands.UpdateCategory;
+using Serivce.Features.Catalog.Queries.GetCategory;
+using Serivce.Features.Catalog.Queries.GetMenu;
+using Serivce.Wrappers;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

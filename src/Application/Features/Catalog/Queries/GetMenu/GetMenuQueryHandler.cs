@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+﻿using Serivce.Interfaces;
 using Domain.Entities.Catalog;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 
-namespace Application.Features.Catalog.Queries.GetMenu
+namespace Serivce.Features.Catalog.Queries.GetMenu
 {
     public class GetMenuQueryHandler : IRequestHandler<GetMenuQuery, List<MenuViewModele>>
     {

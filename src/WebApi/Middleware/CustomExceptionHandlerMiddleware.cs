@@ -4,8 +4,8 @@ using System.Net;
 using System.Text.Json;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
-using Application.Common.Exceptions;
-using Application.Wrappers;
+using Serivce.Common.Exceptions;
+using Serivce.Wrappers;
 
 namespace WebApi.Middleware
 {

@@ -10,7 +10,7 @@ namespace ImageProcessingService
         public static void AddImageService(this IServiceCollection services)
         {
             services.AddTransient<IImageService, UploadImageService>();
-            services.AddTransient<IImageProfile, ImageProfile>();
+            //services.AddTransient<IImageProfile, ImageProfile>();
             services.AddTransient<ImageContext>();
         }
     }

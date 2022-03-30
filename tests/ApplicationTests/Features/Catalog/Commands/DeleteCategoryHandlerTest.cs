@@ -1,4 +1,4 @@
-﻿using Application.Features.Catalog.Commands.DeleteCategory;
+﻿using Serivce.Features.Catalog.Commands.DeleteCategory;
 using ApplicationTests.Common;
 using System;
 using System.Collections.Generic;

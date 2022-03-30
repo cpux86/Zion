@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Catalog.Commands.UpdateCategory
+namespace Serivce.Features.Catalog.Commands.UpdateCategory
 {
     public class UpdateCategoryCommand : IRequest
     {

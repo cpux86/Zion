@@ -1,5 +1,5 @@
-﻿using Application.Common.Exceptions;
-using Application.Interfaces;
+﻿using Serivce.Common.Exceptions;
+using Serivce.Interfaces;
 using AutoMapper;
 using Domain.Entities.Catalog;
 using MediatR;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Features.Catalog.Queries.GetCategory
+namespace Serivce.Features.Catalog.Queries.GetCategory
 {
     public class GetCategoryByIdHandler : IRequestHandler<GetCategoryByIdQuery, CategoryViewModele>
     {

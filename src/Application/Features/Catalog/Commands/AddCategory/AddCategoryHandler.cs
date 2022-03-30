@@ -1,5 +1,5 @@
-﻿using Application.Common.Exceptions;
-using Application.Interfaces;
+﻿using Serivce.Common.Exceptions;
+using Serivce.Interfaces;
 using Domain.Entities.Catalog;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Features.Catalog.Commands.AddCategory
+namespace Serivce.Features.Catalog.Commands.AddCategory
 {
     public class AddCategoryHandler : IRequestHandler<AddCategoryCommand, long>
     {

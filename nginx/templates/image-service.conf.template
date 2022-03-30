@@ -2,18 +2,22 @@
 server {
     listen 8085;
 	
-	location /img {
+	location ~ /img/(\d+)x(\d+)/([a-f,0-9]+/[a-f,0-9]+/[a-f,0-9]+\.jpg$) {
 	    
-	    
-		
-		
-		
-		#image_filter_buffer 10M;
+		image_filter_buffer 10M;
 		
 		image_filter_interlace on;
 		image_filter_jpeg_quality 90;
 		#image_filter resize 150 150;
-		image_filter crop 2000 2000;
+		image_filter crop $1 $2;
+		
+		proxy_pass https://app_servers/img/orig/$3;
+		proxy_intercept_errors      on;
+		error_page                  404 =404 /404;
+	}
+	
+	location /img {
+	    
 		
 		proxy_pass https://app_servers;
 		proxy_intercept_errors      on;
