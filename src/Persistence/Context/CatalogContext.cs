@@ -26,8 +26,10 @@ namespace Persistence.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
+                //optionsBuilder
+                //.UseSqlite(@"DataSource=C:\C#\Zion\DB\Zion.db");
                 optionsBuilder
-                .UseSqlite(@"DataSource=C:\C#\Zion\DB\Zion.db");
+                    .UseNpgsql("Host=localhost;Port=5432;Database=zion;Username=cpux86;Password=1AC290066F");
             }
 
             optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message));

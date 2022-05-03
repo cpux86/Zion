@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.Entities.Catalog;
 using System;
 using System.Collections.Generic;
 //using Ardalis.GuardClauses;
@@ -7,7 +8,7 @@ namespace Domain.Entities.ProductAggregate
 {
     public class Product
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// Название товара
         /// </summary>
@@ -27,7 +28,7 @@ namespace Domain.Entities.ProductAggregate
         /// <summary>
         /// Категория в которую входит продукт
         /// </summary>a
-        //public int CategoryProduct { get; set; }
+        public long CategoryId { get; set; }
 
         private Product()
         {

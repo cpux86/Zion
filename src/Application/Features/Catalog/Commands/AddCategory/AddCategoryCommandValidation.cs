@@ -7,7 +7,7 @@ namespace Serivce.Features.Catalog.Commands.AddCategory
         public AddCategoryCommandValidation()
         {
             RuleFor(addCategoryCommand =>
-            addCategoryCommand.Name).NotEmpty().MaximumLength(20);
+            addCategoryCommand.Name).NotEmpty().MaximumLength(32);
         }
     }
 }

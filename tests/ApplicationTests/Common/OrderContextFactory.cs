@@ -29,28 +29,33 @@ namespace ApplicationTests.Common
             //    .Options;
 
 
-            var options = new DbContextOptionsBuilder<CatalogContext>()
-            .UseSqlite(@"DataSource=C:\C#\Zion\DB\Zion.db").Options;
+            //var options = new DbContextOptionsBuilder<CatalogContext>()
+            //.UseSqlite(@"DataSource=C:\C#\Zion\DB\Zion.db").Options;
 
-            
+            var options = new DbContextOptionsBuilder<CatalogContext>()
+            .UseNpgsql("Host=localhost;Port=5432;Database=zion;Username=cpux86;Password=1AC290066F")
+            .Options;
+
+
+
 
             var context = new CatalogContext(options);
-            //context.Database.EnsureCreated();
-            context.Orders.AddRange(
+            ////context.Database.EnsureCreated();
+            //context.Orders.AddRange(
 
-                new Order(User1,DateTimeOffset.UtcNow).Update(
-                    "Микросхема №1 ШИМ-контроллера",
-                    "Шим-контроллер с частоного преобразователя Siemens",
-                    DateTimeOffset.UtcNow),
-                new Order(User1, DateTimeOffset.UtcNow).Update(
-                    "Микросхема №2 ШИМ-контроллера",
-                    "Шим-контроллер с частоного преобразователя Siemens",
-                    DateTimeOffset.UtcNow),
-                new Order(User1, DateTimeOffset.UtcNow).Update(
-                    "Микросхема №3 ШИМ-контроллера",
-                    "Шим-контроллер с частоного преобразователя Siemens",
-                    DateTimeOffset.UtcNow)
-                );
+            //    new Order(User1,DateTimeOffset.UtcNow).Update(
+            //        "Микросхема №1 ШИМ-контроллера",
+            //        "Шим-контроллер с частоного преобразователя Siemens",
+            //        DateTimeOffset.UtcNow),
+            //    new Order(User1, DateTimeOffset.UtcNow).Update(
+            //        "Микросхема №2 ШИМ-контроллера",
+            //        "Шим-контроллер с частоного преобразователя Siemens",
+            //        DateTimeOffset.UtcNow),
+            //    new Order(User1, DateTimeOffset.UtcNow).Update(
+            //        "Микросхема №3 ШИМ-контроллера",
+            //        "Шим-контроллер с частоного преобразователя Siemens",
+            //        DateTimeOffset.UtcNow)
+            //    );
 
 
             context.SaveChangesAsync();

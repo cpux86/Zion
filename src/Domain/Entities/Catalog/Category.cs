@@ -35,7 +35,7 @@ namespace Domain.Entities.Catalog
         /// <summary>
         /// последняя секция URL
         /// </summary>
-        public string Slug { get; private set; }
+        public string Slug { get; set; }
         
 
         public int Lavel { get; private set; }

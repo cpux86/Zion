@@ -29,13 +29,30 @@ namespace Serivce.Features.Catalog.Queries.GetMenu
             // подгружаю все категории в контекст
             var allMunuList = await _catalogContext.Categories
                 .ToListAsync(cancellationToken);
-            var root = _catalogContext.Categories.Where(c => c.Lavel == 0).ToArray();
-            List<MenuViewModele> menuViewModele = new List<MenuViewModele>();
-            foreach (var item in root)
-            {
-                menuViewModele.Add(_mapper.Map<MenuViewModele>(item));
-            }
             
+            foreach (var item in allMunuList)
+            {
+                item.Slug = item.Parent == null ? $"/{item.Slug}-{item.Id}" : $"{item.Parent.Slug}/{item.Slug}-{item.Id}";
+
+                //if (item.Parent != null)
+                //{
+                //    item.Slug = $"{item.Parent.Slug}-{item.Parent.Id}/{item.Slug}";
+                //}
+
+            }
+
+            var root = _catalogContext.Categories.Where(c => c.Lavel == 0).ToList();
+            root.ForEach(c=>Console.WriteLine(c.Name));
+
+            List<MenuViewModele> menuViewModele = new List<MenuViewModele>();
+
+            root.ForEach(c => menuViewModele.Add(_mapper.Map<MenuViewModele>(c)));
+
+            //foreach (var item in root)
+            //{
+            //    menuViewModele.Add(_mapper.Map<MenuViewModele>(item));
+            //}
+
             //var menuVm = _mapper.Map<MenuVm>(menuViewModele.FirstOrDefault());
             return menuViewModele;
         }

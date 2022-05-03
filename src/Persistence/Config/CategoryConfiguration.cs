@@ -13,14 +13,14 @@ namespace Persistence.Config
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder
-                .HasData(
-                new Category("Root")
-                {
-                    // Первоначальне значение первичного ключа не может быть null
-                    Id = 1
-                }
-                );
+            //builder
+            //    .HasData(
+            //    new Category("Root")
+            //    {
+            //        // Первоначальне значение первичного ключа не может быть null
+            //        Id = 1
+            //    }
+            //    );
 
 
             builder
