@@ -25,6 +25,7 @@ namespace Application.Features.Catalog.ProductFeatures.Commandes.AddProduct
             Product product = new Product(request.Name);
             product.CategoryId = request.CategoryId;
             product.Price = request.Price;
+            product.Description = request.Description;
             _catalogContext.Products.Add(product);
             await _catalogContext.SaveChangesAsync(cancellationToken);
             return product.Id;

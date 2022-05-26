@@ -4,6 +4,7 @@ using Serivce.Features.Catalog.Queries.GetMenu;
 using AutoMapper;
 using Domain.Entities.Catalog;
 using Domain.Entities.ProductAggregate;
+using Application.Features.Catalog.ProductFeatures.Queries.ProductDetailsByIdQuery;
 
 namespace Serivce.Mappings
 {
@@ -24,6 +25,7 @@ namespace Serivce.Mappings
             //    .ForMember(dest =>dest.Categories, opt=>opt.MapFrom(src=>src.Categories));
 
             CreateMap<Category, CategoryViewModele>();
+            CreateMap<Product, ProductDetails>();
         }
     }
 }

@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using WebApi.Middleware;
 using FluentValidation;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace WebApi
 {
@@ -30,7 +31,9 @@ namespace WebApi
             services.AddApplication();
             services.AddPersistence();
             services.AddControllers();
+            services.AddCors();
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddApiVersioning(config =>
             {
                 config.DefaultApiVersion = new ApiVersion(1, 0);
@@ -62,7 +65,7 @@ namespace WebApi
 
             app.UseAuthorization();
 
-
+            app.UseCors(build=>build.AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {

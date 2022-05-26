@@ -10,6 +10,7 @@ using Persistence.Config;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Persistence.Context
 {
@@ -33,6 +34,8 @@ namespace Persistence.Context
             }
 
             optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
+            Console.Clear();
+            optionsBuilder.LogTo(message => Console.WriteLine(message), Microsoft.Extensions.Logging.LogLevel.Information);
 
         }
         protected override void OnModelCreating(ModelBuilder builder)

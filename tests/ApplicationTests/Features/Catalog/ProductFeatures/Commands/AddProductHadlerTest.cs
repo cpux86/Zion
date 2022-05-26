@@ -13,15 +13,17 @@ namespace ApplicationTests.Features.Catalog.ProductFeatures.Commands
     public class AddProductHadlerTest : TestCommandBase
     {
         [Theory]
-        [InlineData("Продукт 1", 3, 200)]
-        [InlineData("Продукт 2", 3, 300)]
-        [InlineData("Продукт 3", 3, 500)]
-        public async void AddProduct(string product, long catId, decimal price)
+        [InlineData("Продукт 1","Описание", 3, 200)]
+        [InlineData("Продукт 2","Описание", 3, 300)]
+        [InlineData("Продукт 3", "Описание", 3, 500)]
+        [InlineData("Продукт 3", "Описание", 1, 5000)]
+        public async void AddProduct(string name, string description, long catId, decimal price)
         {
             var handler = new AddProductHandler(Context);
             var productId = await handler.Handle(new AddProductCommand
             {
-                Name = product,
+                Name = name,
+                Description = description,
                 CategoryId = catId,
                 Price = price
             },

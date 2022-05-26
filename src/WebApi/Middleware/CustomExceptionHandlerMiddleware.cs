@@ -45,7 +45,7 @@ namespace WebApi.Middleware
                     break;
                 case BadRequestException:
                     code = HttpStatusCode.BadRequest;
-                    result = JsonSerializer.Serialize(new Response<string>(exception.Message));
+                    result = JsonSerializer.Serialize(new {error = exception.Message});
                     break;
             }
             context.Response.ContentType = "application/json";

@@ -10,7 +10,7 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20220428193929_Init")]
+    [Migration("20220510202217_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -142,19 +142,32 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("OrderId")
-                        .HasColumnType("uuid");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("OrderId");
-
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("OrderProduct", b =>
+                {
+                    b.Property<Guid>("OrdersId")
+                        .HasColumnType("uuid");
+
+                    b.Property<long>("ProductsId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("OrdersId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("OrderProduct");
                 });
 
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
@@ -198,10 +211,21 @@ namespace Persistence.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
+            modelBuilder.Entity("OrderProduct", b =>
+                {
                     b.HasOne("Domain.Entities.OrderAggregate.Order", null)
-                        .WithMany("Products")
-                        .HasForeignKey("OrderId");
+                        .WithMany()
+                        .HasForeignKey("OrdersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.ProductAggregate.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.Catalog.Category", b =>
@@ -210,11 +234,6 @@ namespace Persistence.Migrations
 
                     b.Navigation("Orders");
 
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Domain.Entities.OrderAggregate.Order", b =>
-                {
                     b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
