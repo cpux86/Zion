@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
 
-namespace Serivce.Common.Behaviors
+namespace Service.Common.Behaviors
 {
     public class ValidationBehavior<TRequest, TResponse>
         : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>

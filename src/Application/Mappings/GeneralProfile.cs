@@ -1,12 +1,11 @@
-﻿
-using Serivce.Features.Catalog.Queries.GetCategory;
-using Serivce.Features.Catalog.Queries.GetMenu;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Entities.Catalog;
 using Domain.Entities.ProductAggregate;
 using Application.Features.Catalog.ProductFeatures.Queries.ProductDetailsByIdQuery;
+using Service.Features.Catalog.Queries.GetCategory;
+using Service.Features.Catalog.Queries.GetMenu;
 
-namespace Serivce.Mappings
+namespace Service.Mappings
 {
     public class GeneralProfile : Profile
     {
@@ -21,10 +20,10 @@ namespace Serivce.Mappings
                 .ForMember(dest => dest.Url, opt => opt.MapFrom(src => src.Slug))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl));
 
-            //CreateMap<MenuViewModele, MenuVm>()
+            //CreateMap<MenuViewModel, MenuVm>()
             //    .ForMember(dest =>dest.Categories, opt=>opt.MapFrom(src=>src.Categories));
 
-            CreateMap<Category, CategoryViewModele>();
+            CreateMap<Category, CategoryViewModel>();
             CreateMap<Product, ProductDetails>();
         }
     }

@@ -1,6 +1,4 @@
-﻿using Serivce.Common.Exceptions;
-using Serivce.Interfaces;
-using Domain.Entities.Catalog;
+﻿using Domain.Entities.Catalog;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Service.Common.Exceptions;
+using Service.Interfaces;
 
-namespace Serivce.Features.Catalog.Commands.DeleteCategory
+namespace Service.Features.Catalog.Commands.DeleteCategory
 {
     public class DeleteCategoryHandler : IRequestHandler<DeleteCategoryCommand>
     {

@@ -1,4 +1,4 @@
-﻿using Serivce.Features.Catalog.Commands.UpdateCategory;
+﻿using Service.Features.Catalog.Commands.UpdateCategory;
 using ApplicationTests.Common;
 using System;
 using System.Collections.Generic;

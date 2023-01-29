@@ -1,5 +1,4 @@
-﻿using Serivce.Common.Exceptions;
-using Serivce.Interfaces;
+﻿using Service.Common.Exceptions;
 using Domain.Entities.Catalog;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -9,8 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Service.Interfaces;
 
-namespace Serivce.Features.Catalog.Commands.AddCategory
+namespace Service.Features.Catalog.Commands.AddCategory
 {
     public class AddCategoryHandler : IRequestHandler<AddCategoryCommand, long>
     {
@@ -23,7 +23,7 @@ namespace Serivce.Features.Catalog.Commands.AddCategory
 
         public async Task<long> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
         {
-            // создаем новую катергорию
+            // создаем новую категорию
             Category subCategory = new Category(request.Name);
             if (request.ParentId == 0)
             {
@@ -31,7 +31,7 @@ namespace Serivce.Features.Catalog.Commands.AddCategory
                     .Where(p => p.Parent == null && p.Name == request.Name)
                     .Any();
 
-                if(isset) throw new Exception("Конфликт имен");
+                if (isset) throw new Exception("Конфликт имен");
                 _catalogContext.Categories.Add(subCategory);
                 
 
@@ -39,12 +39,12 @@ namespace Serivce.Features.Catalog.Commands.AddCategory
                 return subCategory.Id;
             }
 
-            // получаем категорию в которую необходимо встваить подкатегорию
-            Category parent = _catalogContext.Categories
-                // подгружаем ее дочернии категории
+            // получаем категорию в которую необходимо вставить подкатегорию
+            var parent = _catalogContext.Categories
+                // подгружаем ее дочерние категории
                 .Include(c => c.Categories)
                 .Where(c => c.Id == request.ParentId)
-                .FirstOrDefault();
+                ?.FirstOrDefault();
             if (parent == null) return subCategory.Id;
 
             parent.Add(subCategory);

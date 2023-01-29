@@ -1,4 +1,4 @@
-﻿using Serivce.Features.Catalog.Queries.GetMenu;
+﻿using Service.Features.Catalog.Queries.GetMenu;
 using ApplicationTests.Common;
 using AutoMapper;
 using Domain.Entities.Catalog;

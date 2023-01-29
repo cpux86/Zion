@@ -1,5 +1,5 @@
-﻿using Serivce.Features.Catalog.Commands.AddCategory;
-using Serivce.Features.Catalog.Commands.DeleteCategory;
+﻿using Service.Features.Catalog.Commands.AddCategory;
+using Service.Features.Catalog.Commands.DeleteCategory;
 using ApplicationTests.Common;
 using System;
 using System.Collections.Generic;

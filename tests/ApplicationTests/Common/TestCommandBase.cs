@@ -1,4 +1,4 @@
-﻿using Serivce.Interfaces;
+﻿using Service.Interfaces;
 using Persistence.Context;
 using System;
 using System.Collections.Generic;

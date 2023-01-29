@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Serivce.Interfaces;
+using Service.Interfaces;
 
 namespace Application.Features.Catalog.ProductFeatures.Queries.ProductsListByCategoryIdQuery
 {

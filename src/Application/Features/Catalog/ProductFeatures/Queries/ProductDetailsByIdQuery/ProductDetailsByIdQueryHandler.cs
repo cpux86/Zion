@@ -2,8 +2,8 @@
 using Domain.Entities.ProductAggregate;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Serivce.Common.Exceptions;
-using Serivce.Interfaces;
+using Service.Common.Exceptions;
+using Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

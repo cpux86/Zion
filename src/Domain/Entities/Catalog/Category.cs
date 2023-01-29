@@ -36,9 +36,11 @@ namespace Domain.Entities.Catalog
         /// последняя секция URL
         /// </summary>
         public string Slug { get; set; }
-        
 
-        public int Lavel { get; private set; }
+        /// <summary>
+        /// Глубина вложенности меню. Нужно для контроля глубины вложенности меню. Может уберу со временем!!!!!
+        /// </summary>
+        public int Lavel { get;  set; }
         /// <summary>
         /// Родительская категория
         /// </summary>
@@ -58,12 +60,12 @@ namespace Domain.Entities.Catalog
         /// <param name="children">Новая категория</param>
         public void Add(Category children)
         {
-            // проверка на конфилкт имен категорий. не допускаем наличии категорий с одинаковым именем
+            // проверка на конфликт имен категорий. не допускаем наличии категорий с одинаковым именем
             if (Categories.Where(c => c.Name.Equals(children.Name.Trim(), StringComparison.CurrentCultureIgnoreCase))
                 .Any()) throw new Exception("Конфликт имен");
             
             // вычисляю значение глубины для  новой категории
-            int level = Lavel + 1;
+            var level = Lavel + 1;
             // проверяю, не достигла новая категория максимальной глубины
             if (level > _maxDeph) throw new Exception("не допустимая глубина вложения");
             // устанавливаю значение глубины для новой категории

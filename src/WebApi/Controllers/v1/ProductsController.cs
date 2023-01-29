@@ -7,8 +7,8 @@ using AutoMapper;
 using Domain.Entities.ProductAggregate;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Serivce.Common.Exceptions;
-using Serivce.Wrappers;
+using Service.Common.Exceptions;
+using Service.Wrappers;
 using System.Threading.Tasks;
 using WebApi.Modeles;
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Serivce.Features.Orders.Commands.CreateEmptyOrder
+namespace Service.Features.Orders.Commands.CreateEmptyOrder
 {
     public class CreateEmptyOrderCommand : IRequest<Guid>
     {

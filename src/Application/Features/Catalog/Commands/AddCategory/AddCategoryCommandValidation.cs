@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Serivce.Features.Catalog.Commands.AddCategory
+namespace Service.Features.Catalog.Commands.AddCategory
 {
     public class AddCategoryCommandValidation : AbstractValidator<AddCategoryCommand>
     {

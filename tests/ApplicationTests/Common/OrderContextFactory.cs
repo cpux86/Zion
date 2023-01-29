@@ -1,4 +1,4 @@
-﻿using Serivce.Interfaces;
+﻿using Service.Interfaces;
 using Domain.Entities.Catalog;
 using Domain.Entities.OrderAggregate;
 using Domain.Entities.ProductAggregate;

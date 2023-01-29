@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Serivce.Features.Catalog.Queries.GetCategory
+namespace Service.Features.Catalog.Queries.GetCategory
 {
-    public class GetCategoryByIdQuery : IRequest<CategoryViewModele>
+    public class GetCategoryByIdQuery : IRequest<CategoryViewModel>
     {
         public long Id { get; set; }
     }

@@ -1,7 +1,7 @@
 ﻿using Domain.Entities.Catalog;
 using Domain.Entities.ProductAggregate;
 using MediatR;
-using Serivce.Interfaces;
+using Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

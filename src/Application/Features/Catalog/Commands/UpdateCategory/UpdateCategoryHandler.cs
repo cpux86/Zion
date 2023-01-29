@@ -1,5 +1,4 @@
-﻿using Serivce.Interfaces;
-using Domain.Entities.Catalog;
+﻿using Domain.Entities.Catalog;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Service.Interfaces;
 
-namespace Serivce.Features.Catalog.Commands.UpdateCategory
+namespace Service.Features.Catalog.Commands.UpdateCategory
 {
     public class UpdateCategoryHandler : IRequestHandler<UpdateCategoryCommand>
     {

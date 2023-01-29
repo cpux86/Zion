@@ -1,5 +1,4 @@
-﻿using Serivce.Interfaces;
-using Domain.Entities.OrderAggregate;
+﻿using Domain.Entities.OrderAggregate;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Service.Interfaces;
 
-namespace Serivce.Features.Orders.Commands.CreateEmptyOrder
+namespace Service.Features.Orders.Commands.CreateEmptyOrder
 {
     public class CreateEmptyOrderHandler : IRequestHandler<CreateEmptyOrderCommand, Guid>
     {

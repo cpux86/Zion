@@ -1,4 +1,4 @@
-﻿using Serivce.Features.Catalog.Commands.AddCategory;
+﻿using Service.Features.Catalog.Commands.AddCategory;
 using AutoMapper;
 
 namespace WebApi.Modeles

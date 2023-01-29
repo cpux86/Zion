@@ -1,4 +1,4 @@
-﻿using Serivce.Interfaces;
+﻿using Service.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Context;
 

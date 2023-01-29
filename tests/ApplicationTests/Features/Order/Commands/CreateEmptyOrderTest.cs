@@ -1,4 +1,4 @@
-﻿using Serivce.Features.Orders.Commands.CreateEmptyOrder;
+﻿using Service.Features.Orders.Commands.CreateEmptyOrder;
 using ApplicationTests.Common;
 using Domain.Entities.OrderAggregate;
 using System;

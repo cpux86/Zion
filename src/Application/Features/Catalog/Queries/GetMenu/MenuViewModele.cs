@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Serivce.Features.Catalog.Queries.GetMenu
+namespace Service.Features.Catalog.Queries.GetMenu
 {
     public class MenuViewModele
     {

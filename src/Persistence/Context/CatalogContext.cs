@@ -1,4 +1,4 @@
-﻿using Serivce.Interfaces;
+﻿using Service.Interfaces;
 using Domain.Entities;
 using Domain.Entities.Catalog;
 using Domain.Entities.OrderAggregate;
@@ -27,14 +27,14 @@ namespace Persistence.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //optionsBuilder
-                //.UseSqlite(@"DataSource=C:\C#\Zion\DB\Zion.db");
                 optionsBuilder
-                    .UseNpgsql("Host=localhost;Port=5432;Database=zion;Username=cpux86;Password=1AC290066F");
+                .UseSqlite(@"DataSource=C:\CSharp\Zion\DB\Zion.db");
+                //optionsBuilder
+                //    .UseNpgsql("Host=localhost;Port=5432;Database=zion;Username=cpux86;Password=1AC290066F");
             }
 
             optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
-            Console.Clear();
+            //Console.Clear();
             optionsBuilder.LogTo(message => Console.WriteLine(message), Microsoft.Extensions.Logging.LogLevel.Information);
 
         }

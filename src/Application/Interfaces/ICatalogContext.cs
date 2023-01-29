@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Serivce.Interfaces
+namespace Service.Interfaces
 {
     public interface ICatalogContext
     {

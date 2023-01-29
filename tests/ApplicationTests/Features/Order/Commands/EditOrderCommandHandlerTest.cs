@@ -1,5 +1,5 @@
-﻿using Serivce.Features.Orders.Commands.EditOrder;
-using Serivce.Interfaces;
+﻿using Service.Features.Orders.Commands.EditOrder;
+using Service.Interfaces;
 using ApplicationTests.Common;
 using System;
 using System.Collections.Generic;

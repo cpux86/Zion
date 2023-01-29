@@ -1,10 +1,10 @@
 ﻿
-using Serivce.Features.Catalog.Commands.AddCategory;
-using Serivce.Features.Catalog.Commands.DeleteCategory;
-using Serivce.Features.Catalog.Commands.UpdateCategory;
-using Serivce.Features.Catalog.Queries.GetCategory;
-using Serivce.Features.Catalog.Queries.GetMenu;
-using Serivce.Wrappers;
+using Service.Features.Catalog.Commands.AddCategory;
+using Service.Features.Catalog.Commands.DeleteCategory;
+using Service.Features.Catalog.Commands.UpdateCategory;
+using Service.Features.Catalog.Queries.GetCategory;
+using Service.Features.Catalog.Queries.GetMenu;
+using Service.Wrappers;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -37,11 +37,12 @@ namespace WebApi.Controllers.v1
         // Получить категорию по id
         //[Route("{id}")]
         [HttpGet("{id}", Name = "GetCategoryById")]
-        public async Task<CategoryViewModele> GetCategoryById(long id)
+        public async Task<ActionResult<Response<CategoryViewModel>>> GetCategoryById(long id)
         {
             var query = new GetCategoryByIdQuery { Id = id };
             var result = await Mediator.Send(query);
-            return result;
+            var res = new Response<CategoryViewModel>(result);
+            return Ok(res);
         }
 
 

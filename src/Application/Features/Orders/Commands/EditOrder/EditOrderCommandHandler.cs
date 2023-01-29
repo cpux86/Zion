@@ -1,5 +1,4 @@
-﻿using Serivce.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +7,9 @@ using MediatR;
 using System.Threading;
 using Domain.Entities.OrderAggregate;
 using AutoMapper;
+using Service.Interfaces;
 
-namespace Serivce.Features.Orders.Commands.EditOrder
+namespace Service.Features.Orders.Commands.EditOrder
 {
     public class EditOrderCommandHandler : IRequestHandler<EditOrderCommand, bool>
     {

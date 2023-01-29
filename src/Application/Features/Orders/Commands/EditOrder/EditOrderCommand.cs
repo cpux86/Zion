@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Serivce.Features.Orders.Commands.EditOrder
+namespace Service.Features.Orders.Commands.EditOrder
 {
     public class EditOrderCommand : IRequest<bool>
     {

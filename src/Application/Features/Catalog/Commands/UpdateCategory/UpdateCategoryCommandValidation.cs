@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Serivce.Features.Catalog.Commands.UpdateCategory;
+using Service.Features.Catalog.Commands.UpdateCategory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
